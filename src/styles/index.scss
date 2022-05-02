@@ -1,0 +1,18 @@
+@import "./reset.scss";
+@import "./variables.scss";
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    font-family: $lato;
+    line-height: 1.6rem;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+#root {
+    height: 100%;
+    user-select: none;
+}

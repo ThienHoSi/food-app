@@ -1,0 +1,48 @@
+@import './../../styles/variables.scss';
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 200px;
+    width: 440px;
+    height: 42px;
+    border: none;
+    outline: none;
+    border-radius: 999px;
+    background-color: $white;
+    color: $dark;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 1.2rem;
+    box-shadow: 0 3px 8px rgba($color: $black, $alpha: 0.2);
+    padding: 8px $spacing-sm;
+    transition: all ease 0.3s;
+
+    &:not(:last-child) {
+        margin-right: 20px;
+    }
+
+    &.primary {
+        background-color: $primary;
+        color: $white;
+    }
+
+    &.stSize {
+        padding: 2px 4px;
+        min-width: unset;
+        width: 112px;
+        height: 42px;
+
+        @include breakpoint(md) {
+            width: 128px;
+        }
+    }
+
+    &:hover {
+        box-shadow: 0 5px 15px rgba($color: $black, $alpha: 0.25);
+        filter: brightness(92%);
+        cursor: pointer;
+    }
+
+}

@@ -1,0 +1,65 @@
+@import './../../styles/variables.scss';
+
+.container {
+    margin-top: 152px;
+
+    .homeThump {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 320px;
+        background-position: bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        @include breakpoint(lg) {
+            height: 510px;
+        }
+
+        &__content {
+            display: block;
+            position: relative;
+            background-color: $white;
+            color: $text;
+            width: 124px;
+            height: 124px;
+            letter-spacing: 0.5px;
+            border-radius: 30% 70% 70% 30%/ 30% 30% 70% 70%;
+            transition: all ease 0.4s;
+
+            @include breakpoint(lg) {
+                width: 175px;
+                height: 175px;
+            }
+
+            &:hover {
+                background-color: $primary;
+                color: $white;
+            }
+
+            span {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 1.8rem;
+                font-weight: 700;
+
+                @include breakpoint(lg) {
+                    font-size: 2.5rem;
+                }
+
+                strong {
+                    font-size: 3.8rem;
+                    font-weight: 900;
+
+                    @include breakpoint(lg) {
+                        font-size: 5rem;
+                    }
+                }
+            }
+        }
+    }
+}

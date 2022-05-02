@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+// font
+$lato: "Lato",
+sans-serif;
+$pangolin: 'Pangolin',
+cursive;
+
+// color
+$primary: #ff514e;
+$primary2: #fbb403;
+$borderColor: #e0e0e0;
+
+$dark: #0f1515;
+$dark2: #08332f;
+$text: #333;
+
+$aqua: #229b91;
+$white: #fff;
+$black: #030502;
+
+// Heading
+@mixin title {
+    font-size: 2rem;
+    font-family: $pangolin;
+    color: $primary2;
+
+    @include breakpoint(md) {
+        font-size: 2.4rem;
+    }
+}
+
+@mixin subtitle {
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: $text;
+    margin-top: 10px;
+
+    @include breakpoint(md) {
+        font-size: 3.2rem;
+    }
+}
+
+@mixin filterTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: $text;
+    width: 100%;
+    border-bottom: 1px solid $borderColor;
+    padding: $spacing-sm;
+}
+
+// border-radius
+$borderRadius: 12px;
+
+// Letter spacing
+$letterSpacing: 0.4px;
+
+// Spacing:
+$spacing-sm: 12px;
+$spacing-md: 24px;
+$spacing-lg: 32px;
+$spacing-xl: 64px;
+
+// height
+$headerHeight: 60px;
+$headerHeightMd: 72px;
+
+// box shadow
+$boxShadow: 0 1px 1px rgba(0, 0, 0, 0.25),
+0 2px 2px rgba(0, 0, 0, 0.2),
+0 4px 4px rgba(0, 0, 0, 0.15),
+0 8px 8px rgba(0, 0, 0, 0.1),
+0 16px 16px rgba(0, 0, 0, 0.05);
+
+// breakpoints
+@mixin breakpoint($point) {
+    @if $point==xl {
+        @media (min-width: 1120px) {
+            @content;
+        }
+    }
+
+    @else if $point==lg {
+        @media (min-width: 1024px) {
+            @content;
+        }
+    }
+
+    @else if $point==md {
+        @media (min-width: 768px) {
+            @content;
+        }
+    }
+
+    @else if $point==md-only {
+        @media (max-width: 1119px) and (min-width: 600px) {
+            @content;
+        }
+    }
+
+    @else if $point==smd {
+        @media (min-width: 960px) {
+            @content;
+        }
+    }
+
+    @else if $point==lg {
+        @media (max-width: 767px) {
+            @content;
+        }
+    }
+
+    @else if $point==sm {
+        @media (min-width: 600px) {
+            @content;
+        }
+    }
+
+    @else if $point==sm-only {
+        @media (max-width: 599px) {
+            @content;
+        }
+    }
+}
