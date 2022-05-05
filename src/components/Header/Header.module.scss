@@ -15,6 +15,7 @@
 
     @include breakpoint(md) {
         height: $headerHeightMd;
+        padding: unset;
     }
 
     &.active {
@@ -28,6 +29,10 @@
         max-width: 1200px;
         margin: 0 auto;
         justify-content: space-between;
+
+        @include breakpoint(md) {
+            padding: 0 10px;
+        }
 
         &__left {
             display: flex;

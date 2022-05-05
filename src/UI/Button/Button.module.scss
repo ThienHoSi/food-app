@@ -39,6 +39,21 @@
         }
     }
 
+    &.mdSize {
+        padding: 2px 4px;
+        min-width: unset;
+        width: 400px;
+        height: 42px;
+
+        @include breakpoint(smd) {
+            max-width: 260px;
+        }
+
+        @include breakpoint(xl) {
+            max-width: 300px;
+        }
+    }
+
     &:hover {
         box-shadow: 0 5px 15px rgba($color: $black, $alpha: 0.25);
         filter: brightness(92%);

@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 import ShopBanner from '../components/ShopBanner/ShopBanner';
-import ShopProducts from '../components/ShopProducts/ShopProducts';
+import ShopContent from '../components/ShopContent/ShopContent';
 
 const Shop = () => {
   return (
     <Fragment>
       <ShopBanner />
-      <ShopProducts />
+      <ShopContent />
     </Fragment>
   );
 };
