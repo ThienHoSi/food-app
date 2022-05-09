@@ -1,6 +1,7 @@
 import React from 'react';
-import Button from '../../UI/Button/Button';
+import { Link } from 'react-router-dom';
 
+import Button from '../../UI/Button/Button';
 import styles from './HomeBanner.module.scss';
 import './HomeBanner.scss';
 import { MdAddShoppingCart } from 'react-icons/md';
@@ -39,10 +40,12 @@ const Banner = () => {
                   <span>{info.content}</span>
                   <strong>{info.subContent}</strong>
                 </div>
-                <Button primary stSize>
-                  <MdAddShoppingCart />
-                  <span>ORDER NOW</span>
-                </Button>
+                <Link to="shop">
+                  <Button primary stSize>
+                    <MdAddShoppingCart />
+                    <span>ORDER NOW</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </SwiperSlide>

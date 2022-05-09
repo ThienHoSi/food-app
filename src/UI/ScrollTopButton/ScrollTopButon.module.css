@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
+.scrollTopBtn {
+  border: none;
+  outline: none;
+  width: 53px;
+  height: 53px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: #fff;
+  color: #ff514e;
+  position: fixed;
+  right: 30px;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 999;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2.5px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2.5px 10px rgba(0, 0, 0, 0.1);
+  font-size: 2.8rem;
+  -webkit-transition: all ease 0.3s;
+  transition: all ease 0.3s;
+}
+
+.scrollTopBtn.show {
+  opacity: 1;
+  visibility: visible;
+  bottom: 64px;
+}
+
+.scrollTopBtn:hover {
+  background-color: #ff514e;
+  color: #fff;
+  cursor: pointer;
+}
+
+.scrollTopBtn svg {
+  position: relative;
+  top: -1px;
+}
+/*# sourceMappingURL=ScrollTopButon.module.css.map */

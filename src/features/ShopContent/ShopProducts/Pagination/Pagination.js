@@ -3,9 +3,11 @@ import React from 'react';
 import styles from './Pagination.module.scss';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
-const Pagination = ({ emptyShop }) => {
+const Pagination = (props) => {
   return (
-    <section className={`${styles.container} ${emptyShop ? styles.empty : ''}`}>
+    <section
+      className={`${styles.container} ${props.emptyShop ? styles.empty : ''}`}
+    >
       <ul className={styles.pagination}>
         <li className={styles.pagination__item}>
           <a href="/" className={styles.pagination__item__link}>

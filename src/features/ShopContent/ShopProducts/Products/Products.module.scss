@@ -2,12 +2,30 @@
 
 .container {
 
+    .empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        &__img {
+            width: 70%;
+        }
+
+        &__title {
+            font-size: 2.8rem;
+            font-weight: 900;
+        }
+
+    }
+
     .products {
         margin-top: $spacing-md;
         grid-template-columns: repeat(2, 1fr);
         width: 100%;
         display: grid;
-        gap: 20px;
+        column-gap: 20px;
+        row-gap: 40px;
 
         @include breakpoint (md) {
             grid-template-columns: repeat(3, 1fr);
@@ -17,20 +35,7 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-        &.empty {
-            display: block;
 
-            .products__item {
-                display: none;
-            }
-
-            .products__empty {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-            }
-        }
 
         &__item {
             text-decoration: none;
@@ -38,7 +43,13 @@
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            justify-content: center;
+            box-shadow: 0 1px 2px rgba($color: #000000, $alpha: 0.1);
+            transition: all ease 0.3s;
+
+            &:hover {
+                box-shadow: 0 1px 2px $primary;
+                transform: translateY(-1px);
+            }
 
             &__img {
                 width: 100%;
@@ -147,52 +158,74 @@
 
             }
 
-            &__name {
-                font-size: 1.8rem;
-                font-weight: 700;
-                color: $text;
-                margin: $spacing-sm 0;
-                transition: all ease 0.3s;
-                width: 100%;
-                text-align: left;
-
-                &:hover {
-                    color: $primary;
-                }
-            }
-
-            &__descr {
-                font-size: 1.4rem;
-                color: $text;
-                margin-bottom: $spacing-sm;
-            }
-
-            &__footer {
-                width: 100%;
+            &__info {
                 display: flex;
-                justify-content: space-between;
-                align-items: center;
-                font-size: 1.4rem;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: $spacing-sm 8px;
+                width: 100%;
 
-                &__location {
-                    display: flex;
-                    align-items: center;
-                    font-size: 1.4rem;
-                    color: $text;
+                &__name {
+                    font-size: 1.8rem;
+                    font-weight: 700;
+                    color: #333;
+                    margin-bottom: 8px;
+                    transition: all ease 0.3s;
+                    width: 100%;
+                    text-align: left;
+                    display: block;
+                    display: -webkit-box;
+                    line-height: 2rem;
+                    height: 4rem;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
 
-                    svg {
-                        margin-right: 4px;
-                        font-size: 2rem;
+                    &:hover {
                         color: $primary;
                     }
                 }
 
-                &__price {
-                    font-size: 1.8rem;
-                    font-weight: 900;
-                    color: $primary;
+                &__descr {
+                    font-size: 1.5rem;
+                    color: $text;
+                    margin-bottom: 10px;
+                    line-height: 2rem;
+                    height: 4rem;
+                    display: block;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    overflow: hidden;
+                }
+
+                &__footer {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 1.5rem;
+
+                    &__location {
+                        display: flex;
+                        align-items: center;
+                        font-size: 1.5rem;
+                        color: $text;
+
+                        svg {
+                            margin-right: 4px;
+                            font-size: 2rem;
+                            color: $primary;
+                        }
+                    }
+
+                    &__price {
+                        font-size: 1.8rem;
+                        font-weight: 900;
+                        color: $primary;
+                    }
                 }
             }
+
         }
 
         &__empty {

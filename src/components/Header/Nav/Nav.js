@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import styles from './Nav.module.scss';
 import { TiHome } from 'react-icons/ti';
@@ -9,30 +10,30 @@ const Nav = ({ isMenu }) => {
   return (
     <nav className={isMenu ? styles.menu__nav : styles.nav}>
       <ul>
-        <li>
-          <a href="/">
+        <Link to="/">
+          <li>
             <span>
               <TiHome />
             </span>
             Home
-          </a>
-        </li>
-        <li>
-          <a href="/">
+          </li>
+        </Link>
+        <Link to="/shop">
+          <li>
             <span>
               <GiKnifeFork />
             </span>
             Order Online
-          </a>
-        </li>
-        <li>
-          <a href="/">
+          </li>
+        </Link>
+        <Link to="/detail-product">
+          <li>
             <span>
               <MdReviews />
             </span>
             Reviews
-          </a>
-        </li>
+          </li>
+        </Link>
       </ul>
     </nav>
   );

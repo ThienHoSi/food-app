@@ -6,8 +6,8 @@ import { ImFacebook2 } from 'react-icons/im';
 import { BsInstagram } from 'react-icons/bs';
 import { FaTwitterSquare } from 'react-icons/fa';
 
-import appStoreSVG from './../../assets/img/svg/appStore.svg';
-import googlePlaySVG from './../../assets/img/svg/googlePlay.svg';
+import appStoreSVG from '../../assets/img/svg/appStore.svg';
+import googlePlaySVG from '../../assets/img/svg/googlePlay.svg';
 
 const Footer = () => {
   return (

@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Pangolin&display=swap");
+.logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-decoration: none;
+  color: transparent;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.logo__img {
+  height: 48px;
+  position: relative;
+  top: -6px;
+}
+
+.logo__img.lgSize {
+  height: 56px;
+}
+/*# sourceMappingURL=Logo.module.css.map */

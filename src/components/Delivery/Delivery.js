@@ -1,4 +1,5 @@
 import Button from '../../UI/Button/Button';
+import { Link } from 'react-router-dom';
 import styles from './Delivery.module.scss';
 import smallDelivery from './../../assets/img/svg/smallDelivery.svg';
 import bigDelivery from './../../assets/img/svg/bigDelivery.svg';
@@ -27,9 +28,11 @@ const Delivery = () => {
               Delivery Order Num
               <strong>123-77777777</strong>
             </span>
-            <Button primary stSize>
-              ORDER NOW
-            </Button>
+            <Link to="shop">
+              <Button primary stSize>
+                ORDER NOW
+              </Button>
+            </Link>
           </div>
         </div>
         <div className={styles.delivery__img}>

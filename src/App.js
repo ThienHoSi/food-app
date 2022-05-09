@@ -1,20 +1,24 @@
-import { Fragment } from 'react';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
-// import Home from './Pages/Home';
-import Shop from './Pages/Shop';
-import DetailProduct from './Pages/DetailProduct';
-import ScrollTopButton from './../src/UI/ScrollTopButton/ScrollTopButon';
+import { Fragment, Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ScrollTopButton from './UI/ScrollTopButton/ScrollTopButon';
+
+const Home = lazy(() => import('./Pages/Home'));
+const Shop = lazy(() => import('./Pages/Shop'));
+const DetailProduct = lazy(() => import('./Pages/DetailProduct'));
 
 function App() {
   return (
     <Fragment>
-      <Header />
-      {/* <Home /> */}
-      <Shop />
-      {/* <DetailProduct /> */}
-      <ScrollTopButton />
-      <Footer />
+      <Router>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/detail-product" element={<DetailProduct />} />
+          </Routes>
+          <ScrollTopButton />
+        </Suspense>
+      </Router>
     </Fragment>
   );
 }

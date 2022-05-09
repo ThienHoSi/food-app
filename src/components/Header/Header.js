@@ -83,16 +83,16 @@ const Header = () => {
             <span>Sign In</span>
             <ul className={styles.header__grid__right__account__info}>
               <li>
-                  <RiAccountPinBoxFill />
-                  <span>My account</span>
+                <RiAccountPinBoxFill />
+                <span>My account</span>
               </li>
               <li>
-                  <AiOutlineTags />
-                  <span>My cart</span>
+                <AiOutlineTags />
+                <span>My cart</span>
               </li>
               <li>
-                  <RiLogoutBoxRLine />
-                  <span>Logout</span>
+                <RiLogoutBoxRLine />
+                <span>Logout</span>
               </li>
             </ul>
           </a>
