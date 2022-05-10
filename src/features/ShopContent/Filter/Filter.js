@@ -32,7 +32,10 @@ const Filter = () => {
           <h3 className={styles.filter__price__title}>Price</h3>
           <form className={styles.filter__price__form}>
             {priceOptions.map((opt) => (
-              <label className={styles.filter__price__form__checkbox}>
+              <label
+                key={opt.id}
+                className={styles.filter__price__form__checkbox}
+              >
                 <span
                   className={styles.filter__price__form__checkbox__checkmark}
                 />

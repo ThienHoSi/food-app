@@ -18,7 +18,7 @@ const Nav = ({ isMenu }) => {
             Home
           </li>
         </Link>
-        <Link to="/shop">
+        <Link to="/shop/best-foods">
           <li>
             <span>
               <GiKnifeFork />

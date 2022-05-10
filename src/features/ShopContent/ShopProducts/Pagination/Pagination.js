@@ -1,46 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-import styles from './Pagination.module.scss';
+import './Pagination.scss';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { setFilter } from './../../ShopContentSlice';
+import ReactPaginate from 'react-paginate';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
-const Pagination = (props) => {
+import {
+  nameSelector,
+  totalRowSelector,
+  filterSelector,
+} from '../../../../app/selectors';
+import {
+  fetchProductById,
+  setName,
+  fetchPagination,
+} from '../../ShopContentSlice';
+
+const Pagination = () => {
+  const { name } = useParams();
+  const dispatch = useDispatch();
+  const totalRow = useSelector(totalRowSelector);
+  const params = useSelector(filterSelector);
+
+  useEffect(() => {
+    dispatch(setName(name));
+    dispatch(fetchPagination(name));
+    dispatch(fetchProductById(params));
+  }, [name, params]);
+  const maxPage = Math.ceil(totalRow / 16);
+
+  const handlePagination = (page) => {
+    const { selected } = page;
+
+    const params = selected + 1;
+    dispatch(fetchProductById({ _page: params, _limit: 16 }));
+  };
+
   return (
-    <section
-      className={`${styles.container} ${props.emptyShop ? styles.empty : ''}`}
-    >
-      <ul className={styles.pagination}>
-        <li className={styles.pagination__item}>
-          <a href="/" className={styles.pagination__item__link}>
-            <MdKeyboardArrowLeft />
-          </a>
-        </li>
-        <li className={`${styles.pagination__item} ${styles.selected}`}>
-          <a href="/" className={styles.pagination__item__link}>
-            1
-          </a>
-        </li>
-        <li className={styles.pagination__item}>
-          <a href="/" className={styles.pagination__item__link}>
-            2
-          </a>
-        </li>
-        <li className={styles.pagination__item}>
-          <a href="/" className={styles.pagination__item__link}>
-            3
-          </a>
-        </li>
-        <li className={styles.pagination__item}>
-          <a href="/" className={styles.pagination__item__link}>
-            4
-          </a>
-        </li>
-        <li className={styles.pagination__item}>
-          <a href="/" className={styles.pagination__item__link}>
-            <MdKeyboardArrowRight />
-          </a>
-        </li>
-      </ul>
-    </section>
+    <ReactPaginate
+      previousLabel={<MdKeyboardArrowLeft />}
+      nextLabel={<MdKeyboardArrowRight />}
+      pageCount={maxPage}
+      pageRangeDisplayed={3}
+      onPageChange={handlePagination}
+      marginPagesDisplayed={1}
+      containerClassName={'shop-pagination'}
+      // forcePage={paginationActive}
+    />
   );
 };
 

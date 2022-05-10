@@ -8,31 +8,29 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { RiTruckLine, RiCalendarCheckLine } from 'react-icons/ri';
 import { GoTag } from 'react-icons/go';
 
-const DetailInfo = () => {
+const DetailInfo = ({ product }) => {
   return (
     <section className={styles.container}>
       <div className={styles.product}>
         <div className={styles.product__info}>
-          <h1 className={styles.product__info__name}>Momofuku</h1>
+          <h1 className={styles.product__info__name}>{product.name}</h1>
           <span className={styles.product__info__rate}>
             <BsStarFill />
             <BsStarFill />
             <BsStarFill />
             <BsStarFill />
-            <BsStar />
+            {product.rate === 5 ? <BsStarFill /> : <BsStar />}
           </span>
-          <span className={styles.product__info__price}>$169.00</span>
+          <span className={styles.product__info__price}>${product.price}</span>
           <div className={styles.product__info__ca}>
             <span className={styles.product__info__ca__item}>
               Category:<strong>Best Foods</strong>
             </span>
             <span className={styles.product__info__ca__item}>
-              Address:<strong>New York, NY</strong>
+              Address:<strong>{product.country}</strong>
             </span>
           </div>
-          <p className={styles.product__info__descr}>
-            Half Bo Ssam Dinner for 4-6
-          </p>
+          <p className={styles.product__info__descr}>{product.dsc}</p>
           <form className={styles.product__info__form}>
             <span className={styles.product__info__form__title}>
               Choose your options

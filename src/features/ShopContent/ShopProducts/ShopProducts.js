@@ -10,7 +10,7 @@ const ShopProducts = () => {
   return (
     <section className={styles.container}>
       <Handle />
-      <Products  />
+      <Products />
       <Pagination />
     </section>
   );

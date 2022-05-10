@@ -4,14 +4,21 @@ import shopApi from '../../apis/shopApi';
 export const shopContentSlice = createSlice({
   name: 'shop',
   initialState: {
-    status: 'idle',
+    loading: null,
     filter: {
       _page: 1,
       _limit: 16,
     },
     shopProducts: [],
+    name: null,
+    foodById: [],
+    totalRow: 0,
+    selectedSort: 'Featured',
   },
   reducers: {
+    setFilter: (state, action) => {
+      state.filter = action.payload;
+    },
     sortProductsByOrder: (state, action) => {
       switch (action.payload) {
         case 'price_lth':
@@ -30,33 +37,62 @@ export const shopContentSlice = createSlice({
           return state;
       }
     },
-    searchProducts: (state, action) => {
-      state.shopProducts.filter((product) =>
-        product.name.includes(action.payload)
-      );
+    setName: (state, action) => {
+      state.name = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProductList.pending, (state, action) => {
-        state.status = 'loading';
+      .addCase(fetchProductById.pending, (state, action) => {
+        state.loading = 'pending';
       })
-      .addCase(fetchProductList.fulfilled, (state, action) => {
+      .addCase(fetchProductById.fulfilled, (state, action) => {
         state.shopProducts = action.payload;
-        state.status = 'idle';
+        state.selectedSort = action.payload;
+        state.loading = 'fulfilled';
+      })
+      .addCase(fetchPagination.pending, (state, action) => {
+        state.loading = 'pending';
+      })
+      .addCase(fetchPagination.fulfilled, (state, action) => {
+        state.loading = 'fulfilled';
+        state.totalRow = action.payload;
+      })
+      .addCase(fetchProductDetail.pending, (state, action) => {
+        state.loading = 'pending';
+      })
+      .addCase(fetchProductDetail.fulfilled, (state, action) => {
+        state.shopProducts = action.payload;
+        state.loading = 'fulfilled';
       });
   },
 });
 
-export const { setShopProducts, sortProductsByOrder, searchProducts } =
+export const { setFilter, sortProductsByOrder, setName } =
   shopContentSlice.actions;
 
 const shopContentReducer = shopContentSlice.reducer;
 
-export const fetchProductList = createAsyncThunk(
-  'products/fetchProducts',
-  async () => {
-    const res = await shopApi.getAll('/best-foods', { _page: 1, _limit: 16 });
+export const fetchProductById = createAsyncThunk(
+  'products/fetchProductsByPag',
+  async (params, { dispatch, getState }) => {
+    const res = await shopApi.getAll('/best-foods', params);
+    return res;
+  }
+);
+
+export const fetchPagination = createAsyncThunk(
+  '/products/fetchPagination',
+  async (name) => {
+    const res = await shopApi.getAll('pagination', { _page: 1, _limit: 16 });
+    return res[name];
+  }
+);
+
+export const fetchProductDetail = createAsyncThunk(
+  '/products/fectchProductDetail',
+  async (productId, thunkAPI) => {
+    const res = await shopApi.get(productId);
     return res;
   }
 );
