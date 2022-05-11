@@ -6,6 +6,7 @@ import {
   Outlet,
 } from 'react-router-dom';
 import ScrollTopButton from './UI/ScrollTopButton/ScrollTopButon';
+import PrevFilterProvider from './context/PrevFilterContext';
 
 const DetailProduct = lazy(() => import('./Pages/DetailProduct'));
 const Home = lazy(() => import('./Pages/Home'));
@@ -15,19 +16,21 @@ function App() {
   return (
     <Fragment>
       <Router>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
+        <PrevFilterProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>
+              <Route path="/" element={<Home />} />
 
-            <Route path="/shop" element={<Shop />}>
-              <Route path=":name" element={<Outlet />} />
-            </Route>
-            <Route path="/detail-product" element={<DetailProduct />}>
-              <Route path=":productId" element={<Outlet />} />
-            </Route>
-          </Routes>
-          <ScrollTopButton />
-        </Suspense>
+              <Route path="/shop" element={<Shop />}>
+                <Route path=":name" element={<Outlet />} />
+              </Route>
+              <Route path="/detail-product" element={<DetailProduct />}>
+                <Route path=":productId" element={<Outlet />} />
+              </Route>
+            </Routes>
+            <ScrollTopButton />
+          </Suspense>
+        </PrevFilterProvider>
       </Router>
     </Fragment>
   );

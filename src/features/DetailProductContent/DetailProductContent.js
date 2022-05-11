@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { foodListSelector } from '../../app/selectors';
-import { fetchProductDetail } from '../ShopContent/ShopContentSlice';
+import { productListSelector } from '../../app/selectors';
+import { fetchProductDetail } from '../ShopContent/thunk';
 import styles from './DetailProductContent.module.scss';
 import DetailImage from './components/DetailImage/DetailImage';
 import DetailInfo from './components/DetailInfo/DetailInfo';
@@ -13,7 +13,7 @@ import DetailRelated from './components/DetailRelated/DetailRelated';
 const DetailProductContent = () => {
   const { productId } = useParams();
   const dispatch = useDispatch();
-  const product = useSelector(foodListSelector);
+  const product = useSelector(productListSelector);
   useEffect(() => {
     if (productId && productId !== '') {
       dispatch(fetchProductDetail(productId));

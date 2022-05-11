@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { sortProductsByOrder } from '../../ShopContentSlice';
 
 import styles from './Handle.module.scss';
@@ -8,14 +7,30 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { dataTypes } from '../../../../constants/handleDataTypes';
 
+import { PrevFilterContext } from '../../../../context/PrevFilterContext';
+import { fetchProductsBySearch } from '../../thunk';
+
 const Handle = () => {
-  const { name } = useParams();
+  const { handlePrevious } = useContext(PrevFilterContext);
+  const { selectedDrop, setSelectedDrop, setPrevSearch } = handlePrevious();
 
   const [dropListOpen, setDropListOpen] = useState(false);
-  const [selectedValue, setSeletedValue] = useState('Featured');
-  // const [searchText, setSearchText] = useState('');
+  const [searchText, setSearchText] = useState('');
   const ref = useRef();
+
   const dispatch = useDispatch();
+
+  const handleSearch = (e) => {
+    handlePrevious('search');
+    e.preventDefault();
+
+    if (!searchText) return;
+
+    const query = { name_like: searchText };
+    dispatch(fetchProductsBySearch({ name: 'our-foods', query: searchText }));
+    setSearchText('');
+    setPrevSearch(query);
+  };
 
   // close sort list when user clicks outsite
   useEffect(() => {
@@ -33,18 +48,20 @@ const Handle = () => {
   }, []);
 
   const onFilterBySort = (sort, value) => {
-    setSeletedValue(value);
+    handlePrevious('sort');
     dispatch(sortProductsByOrder(sort));
+    setSelectedDrop(value);
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.handle}>
-        <form className={styles.handle__search}>
+        <form onSubmit={handleSearch} className={styles.handle__search}>
           <input
-            // value={searchText}
+            value={searchText}
             placeholder="Search your product"
             className={styles.handle__search__input}
+            onChange={(e) => setSearchText(e.target.value)}
           />
           <button className={styles.handle__search__btn}>
             <AiOutlineSearch />
@@ -57,7 +74,7 @@ const Handle = () => {
             className={styles.handle__drop__current}
             // onClick={handleToggleDropList}
           >
-            <span>{selectedValue}</span>
+            <span>{selectedDrop}</span>
             <MdKeyboardArrowDown />
           </div>
           <ul

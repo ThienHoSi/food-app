@@ -12,25 +12,25 @@ import emptyShopSVG from '../../../../assets/img/svg/empty-shop.svg';
 
 import { useSelector } from 'react-redux';
 import {
-  foodListSelector,
+  productListSelector,
   loadingStatusSelector,
 } from '../../../../app/selectors';
 
 const Products = () => {
-  const shopProducts = useSelector(foodListSelector);
+  const products = useSelector(productListSelector);
   const loading = useSelector(loadingStatusSelector);
 
   return (
     <div className={styles.container}>
-      {loading === 'pending' && (
+      {loading === 'idle' && (
         <div className={styles.loading}>
           <span />
         </div>
       )}
       {loading === 'fulfilled' && (
         <div className={styles.products}>
-          {shopProducts.length > 0 ? (
-            shopProducts.map(
+          {products.length > 0 ? (
+            products.map(
               ({ id, img, name, dsc, price, rate, country }, idx) => (
                 <Link
                   to={`/detail-product/${id}`}
