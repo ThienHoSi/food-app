@@ -15,7 +15,7 @@ const ShopContent = () => {
   useEffect(() => {
     dispatch(fetchProducts({ name: name, limit: 16 }));
     dispatch(fetchPagination(name));
-  }, []);
+  }, [name, dispatch]);
 
   return (
     <section className={styles.container}>

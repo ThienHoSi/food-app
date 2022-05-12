@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState, useRef } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { sortProductsByOrder } from '../../ShopContentSlice';
 
 import styles from './Handle.module.scss';
@@ -7,12 +7,17 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { dataTypes } from '../../../../constants/handleDataTypes';
 
-import { PrevFilterContext } from '../../../../context/PrevFilterContext';
 import { fetchProductsBySearch } from '../../thunk';
+import { selectedDropSelector } from '../../../../app/selectors';
+import {
+  setPrevSearch,
+  onSearch,
+  setPrevSort,
+  setPrevSeletedDrop,
+} from '../../Filter/FilterSlice';
 
 const Handle = () => {
-  const { handlePrevious } = useContext(PrevFilterContext);
-  const { selectedDrop, setSelectedDrop, setPrevSearch } = handlePrevious();
+  const selectedDrop = useSelector(selectedDropSelector);
 
   const [dropListOpen, setDropListOpen] = useState(false);
   const [searchText, setSearchText] = useState('');
@@ -21,7 +26,7 @@ const Handle = () => {
   const dispatch = useDispatch();
 
   const handleSearch = (e) => {
-    handlePrevious('search');
+    dispatch(onSearch());
     e.preventDefault();
 
     if (!searchText) return;
@@ -29,7 +34,7 @@ const Handle = () => {
     const query = { name_like: searchText };
     dispatch(fetchProductsBySearch({ name: 'our-foods', query: searchText }));
     setSearchText('');
-    setPrevSearch(query);
+    dispatch(setPrevSearch(query));
   };
 
   // close sort list when user clicks outsite
@@ -45,12 +50,12 @@ const Handle = () => {
     };
 
     window.addEventListener('click', handleClickDrop);
-  }, []);
+  }, [dropListOpen]);
 
   const onFilterBySort = (sort, value) => {
-    handlePrevious('sort');
+    dispatch(setPrevSort());
     dispatch(sortProductsByOrder(sort));
-    setSelectedDrop(value);
+    dispatch(setPrevSeletedDrop(value));
   };
 
   return (
@@ -69,11 +74,7 @@ const Handle = () => {
         </form>
 
         <div className={styles.handle__drop}>
-          <div
-            ref={ref}
-            className={styles.handle__drop__current}
-            // onClick={handleToggleDropList}
-          >
+          <div ref={ref} className={styles.handle__drop__current}>
             <span>{selectedDrop}</span>
             <MdKeyboardArrowDown />
           </div>

@@ -1,8 +1,5 @@
-import { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { PrevFilterContext } from '../../../context/PrevFilterContext';
 import { fetchProducts } from '../thunk';
 
 import styles from './Filter.module.scss';
@@ -10,47 +7,59 @@ import { BsStarFill, BsStar } from 'react-icons/bs';
 import { shopFilterInfo } from '../../../constants/shopFilterInfo';
 import { priceOptions } from '../../../constants/priceOptions';
 
-const Filter = () => {
-  const { name } = useParams();
+import {
+  nameActiveSelector,
+  prevNameSelector,
+  prevPriceSelector,
+  prevRateSelector,
+  selectedRadioSelector,
+} from '../../../app/selectors';
+import {
+  setNameActive,
+  setPrevName,
+  setPrevPrice,
+  setPrevRate,
+  setSelectedRadio,
+} from './FilterSlice';
 
+const Filter = () => {
   const dispatch = useDispatch();
-  const { handlePrevious } = useContext(PrevFilterContext);
-  const { selectedRadio, nameActive } = handlePrevious();
+
+  const prevName = useSelector(prevNameSelector);
+  const prevPrice = useSelector(prevPriceSelector);
+  const prevRate = useSelector(prevRateSelector);
+  const selectedRadio = useSelector(selectedRadioSelector);
+  const nameActive = useSelector(nameActiveSelector);
 
   const handleFilterByName = (params) => {
-    const { prevName, setPrevName, setSelectedRadio, setNameActive } =
-      handlePrevious('name', params);
-
     if (params !== prevName) {
       dispatch(fetchProducts({ name: params }));
-      setSelectedRadio(null);
+      dispatch(setSelectedRadio(null));
     }
-    setPrevName(params);
-    setNameActive(params);
+    dispatch(setPrevName(params));
+    dispatch(setNameActive(params));
   };
 
   const handleOptChange = (e) => {
-    const { setSelectedRadio } = handlePrevious();
-    setSelectedRadio(e.target.value);
+    dispatch(setSelectedRadio(e.target.value));
   };
 
   const handleFilterByPrice = (params) => {
-    const { prevPrice, setPrevPrice } = handlePrevious('price', params);
     if (prevPrice !== params) {
       dispatch(fetchProducts({ name: nameActive, query: params }));
     }
 
-    setPrevPrice(params);
+    dispatch(setPrevPrice(params));
   };
 
   const handleFilterByRate = (params) => {
     const stringParams = JSON.stringify(params);
-    const { prevRate, setPrevRate } = handlePrevious('rate', params);
 
     if (prevRate !== stringParams) {
       dispatch(fetchProducts({ name: nameActive, query: params }));
     }
-    setPrevRate(stringParams);
+
+    dispatch(setPrevRate(stringParams));
   };
 
   return (
