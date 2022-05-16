@@ -1,6 +1,9 @@
 const productListSelector = (state) => state.shop.productList;
 const loadingStatusSelector = (state) => state.shop.status;
 const totalRowsSelector = (state) => state.shop.totalRows;
+const pageAndLimitSelector = (state) => state.shop.pageAndLimit;
+const detailProductSelector = (state) => state.shop.detailProduct;
+const productIdSelector = (state) => state.shop.productId;
 
 const prevNameSelector = (state) => state.filter.prevName;
 const prevPriceSelector = (state) => state.filter.prevPrice;
@@ -13,6 +16,9 @@ export {
   productListSelector,
   loadingStatusSelector,
   totalRowsSelector,
+  pageAndLimitSelector,
+  detailProductSelector,
+  productIdSelector,
   prevNameSelector,
   prevPriceSelector,
   prevRateSelector,

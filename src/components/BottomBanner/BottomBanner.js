@@ -24,12 +24,12 @@ const BottomBanner = () => {
                 {info.descr}
               </p>
               <div className={styles.bottomBanner__content__download}>
-                <a href="/">
+                <span>
                   <img src={appStoreSVG} alt="App Store" />
-                </a>
-                <a href="/">
+                </span>
+                <span>
                   <img src={googlePlaySVG} alt="Google Play" />
-                </a>
+                </span>
               </div>
             </div>
           </div>

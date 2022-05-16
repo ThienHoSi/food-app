@@ -42,8 +42,6 @@ const DetailTab = () => {
     };
 
     window.addEventListener('resize', handleResizeWindow);
-
-    handleResizeWindow();
   }, [firstBtn, btnElement]);
 
   return (

@@ -6,7 +6,7 @@ import logoSVG from './../../assets/img/svg/logo.svg';
 
 const Logo = ({ lgSize }) => {
   return (
-    <Link to="/" className={styles.logo}>
+    <Link to="/home" className={styles.logo}>
       <img
         src={logoSVG}
         alt="logo"

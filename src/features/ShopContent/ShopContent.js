@@ -6,21 +6,25 @@ import ShopProducts from './ShopProducts/ShopProducts';
 import { useParams } from 'react-router-dom';
 
 import { fetchPagination, fetchProducts } from './thunk';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { pageAndLimitSelector } from '../../app/selectors';
 
 const ShopContent = () => {
   const dispatch = useDispatch();
+  // const nameActive = useSelector(nameActiveSelector);
+  const params = useSelector(pageAndLimitSelector);
   const { name } = useParams();
 
   useEffect(() => {
-    dispatch(fetchProducts({ name: name, limit: 16 }));
+    dispatch(fetchProducts({ name: name, params }));
     dispatch(fetchPagination(name));
-  }, [name, dispatch]);
+  }, [params, name, dispatch]);
 
   return (
     <section className={styles.container}>
       <div className={styles.content}>
         <Filter />
+
         <ShopProducts />
       </div>
     </section>

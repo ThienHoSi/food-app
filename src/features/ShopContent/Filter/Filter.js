@@ -44,22 +44,22 @@ const Filter = () => {
     dispatch(setSelectedRadio(e.target.value));
   };
 
-  const handleFilterByPrice = (params) => {
-    if (prevPrice !== params) {
-      dispatch(fetchProducts({ name: nameActive, query: params }));
+  const handleFilterByPrice = (query) => {
+    if (prevPrice !== query) {
+      dispatch(fetchProducts({ name: nameActive, params: query }));
     }
 
-    dispatch(setPrevPrice(params));
+    dispatch(setPrevPrice(query));
   };
 
-  const handleFilterByRate = (params) => {
-    const stringParams = JSON.stringify(params);
+  const handleFilterByRate = (query) => {
+    const stringQuery = JSON.stringify(query);
 
-    if (prevRate !== stringParams) {
-      dispatch(fetchProducts({ name: nameActive, query: params }));
+    if (prevRate !== stringQuery) {
+      dispatch(fetchProducts({ name: nameActive, params: query }));
     }
 
-    dispatch(setPrevRate(stringParams));
+    dispatch(setPrevRate(stringQuery));
   };
 
   return (
@@ -70,7 +70,7 @@ const Filter = () => {
           <ul className={styles.filter__popular__list}>
             {shopFilterInfo.map((info) => (
               <li
-                onClick={() => handleFilterByName(info.name)}
+                onClick={() => handleFilterByName(info.type)}
                 key={info.id}
                 className={styles.filter__popular__list__item}
               >

@@ -3,7 +3,6 @@ import {
   fetchPagination,
   fetchProducts,
   fetchProductDetail,
-  fetchProductsBySearch,
 } from './thunk';
 
 export const shopContentSlice = createSlice({
@@ -11,8 +10,13 @@ export const shopContentSlice = createSlice({
   initialState: {
     status: 'idle',
     productList: [],
+    detailProduct: [],
     totalRows: 0,
     paginationActive: 0,
+    productId: null,
+    pageAndLimit: {
+      _page: 1,
+    },
   },
   reducers: {
     setTotalRows: (state, action) => {
@@ -39,6 +43,9 @@ export const shopContentSlice = createSlice({
     setName: (state, action) => {
       state.name = action.payload;
     },
+    setProductId: (state, action) => {
+      state.name = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -56,24 +63,17 @@ export const shopContentSlice = createSlice({
         state.status = 'fulfilled';
         state.totalRows = action.payload;
       })
-      .addCase(fetchProductsBySearch.pending, (state, action) => {
-        state.status = 'pending';
-      })
-      .addCase(fetchProductsBySearch.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
-        state.productList = action.payload;
-      })
       .addCase(fetchProductDetail.pending, (state, action) => {
         state.status = 'pending';
       })
       .addCase(fetchProductDetail.fulfilled, (state, action) => {
         state.status = 'fulfilled';
-        state.productList = action.payload;
+        state.detailProduct = action.payload;
       });
   },
 });
 
-export const { setTotalRows, setSelectedDrop, sortProductsByOrder, setName } =
+export const { setTotalRows, setSelectedDrop, sortProductsByOrder } =
   shopContentSlice.actions;
 
 const shopContentReducer = shopContentSlice.reducer;

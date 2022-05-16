@@ -7,13 +7,14 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { dataTypes } from '../../../../constants/handleDataTypes';
 
-import { fetchProductsBySearch } from '../../thunk';
+import { fetchProducts } from '../../thunk';
 import { selectedDropSelector } from '../../../../app/selectors';
 import {
   setPrevSearch,
   onSearch,
   setPrevSort,
   setPrevSeletedDrop,
+  setNameActive,
 } from '../../Filter/FilterSlice';
 
 const Handle = () => {
@@ -31,10 +32,11 @@ const Handle = () => {
 
     if (!searchText) return;
 
-    const query = { name_like: searchText };
-    dispatch(fetchProductsBySearch({ name: 'our-foods', query: searchText }));
+    const params = { name_like: searchText };
+    dispatch(fetchProducts({ name: 'our-foods', params }));
     setSearchText('');
-    dispatch(setPrevSearch(query));
+    dispatch(setPrevSearch(params));
+    dispatch(setNameActive('our-foods'));
   };
 
   // close sort list when user clicks outsite

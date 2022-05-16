@@ -2,10 +2,12 @@ import React from 'react';
 
 import styles from './Modal.module.scss';
 
-const Modal = ({ show, children }) => {
+const Modal = ({ show, toggle, children }) => {
   return (
     <div className={`${styles.modal} ${show ? styles.active : ''}`}>
-      {children}
+      <div onClick={toggle} className={styles.modal__overlay}>
+      </div>
+        {children}
     </div>
   );
 };

@@ -1,11 +1,16 @@
-import { Fragment, Suspense, lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Outlet,
+  Navigate,
 } from 'react-router-dom';
 import ScrollTopButton from './UI/ScrollTopButton/ScrollTopButon';
+
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+// import DetailProductContent from './features/DetailProductContent/DetailProductContent';
+// import ShopContent from './features/ShopContent/ShopContent';
 
 const DetailProduct = lazy(() => import('./Pages/DetailProduct'));
 const Home = lazy(() => import('./Pages/Home'));
@@ -13,23 +18,21 @@ const Shop = lazy(() => import('./Pages/Shop'));
 
 function App() {
   return (
-    <Fragment>
+    <div className="App">
       <Router>
         <Suspense fallback={<div>Loading...</div>}>
+          <Header />
           <Routes>
-            <Route path="/" element={<Home />} />
-
-            <Route path="/shop" element={<Shop />}>
-              <Route path=":name" element={<Outlet />} />
-            </Route>
-            <Route path="/detail-product" element={<DetailProduct />}>
-              <Route path=":productId" element={<Outlet />} />
-            </Route>
+            <Route path="/" element={<Navigate to="/home" replace />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/product-detail/:id" element={<DetailProduct />} />
+            <Route path="/shop/:name" element={<Shop />} />
           </Routes>
+          <Footer />
           <ScrollTopButton />
         </Suspense>
       </Router>
-    </Fragment>
+    </div>
   );
 }
 

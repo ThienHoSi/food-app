@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 import Button from '../../UI/Button/Button';
 import styles from './HomeBanner.module.scss';
@@ -12,6 +11,8 @@ import 'swiper/scss';
 import 'swiper/scss/pagination';
 
 const Banner = () => {
+  
+
   return (
     <div className={styles.SliderWrapper}>
       <Swiper
@@ -40,12 +41,10 @@ const Banner = () => {
                   <span>{info.content}</span>
                   <strong>{info.subContent}</strong>
                 </div>
-                <Link to="shop">
-                  <Button primary stSize>
+                  <Button primary stSize page='shop'>
                     <MdAddShoppingCart />
                     <span>ORDER NOW</span>
                   </Button>
-                </Link>
               </div>
             </div>
           </SwiperSlide>

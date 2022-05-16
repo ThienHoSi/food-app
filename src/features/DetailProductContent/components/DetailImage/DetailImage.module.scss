@@ -2,8 +2,9 @@
 
 .container {
     width: 100%;
+    min-height: 400px;
 
-    @include breakpoint(smd) {
+    @include breakpoint(md) {
         width: 50%;
     }
 

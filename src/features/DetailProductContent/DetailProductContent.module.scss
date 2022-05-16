@@ -12,7 +12,7 @@
         .product {
             width: 100%;
 
-            @include breakpoint(smd) {
+            @include breakpoint(md) {
                 display: flex;
             }
         }

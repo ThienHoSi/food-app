@@ -9,7 +9,7 @@ export const filterSlice = createSlice({
     prevSearch: null,
     selectedRadio: null,
     selectedDrop: 'Featured',
-    nameActive: null,
+    nameActive: 'best-foods',
   },
   reducers: {
     setPrevName: (state, action) => {

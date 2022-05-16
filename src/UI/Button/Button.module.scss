@@ -45,6 +45,10 @@
         width: 400px;
         height: 42px;
 
+        @include breakpoint(md) {
+            max-width: 214px;
+        }
+
         @include breakpoint(smd) {
             max-width: 260px;
         }

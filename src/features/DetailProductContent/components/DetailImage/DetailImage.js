@@ -1,18 +1,17 @@
 import React from 'react';
 
 import styles from './DetailImage.module.scss';
-import momofuku from './../../../../assets/img/Momofuku.avif';
 
-const DetailImage = ({ product }) => {
+const DetailImage = ({ product, id }) => {
   return (
     <div className={styles.container}>
-      <div className={styles.main}>
-        <img
-          src={product.img}
-          alt={product.name}
-          className={styles.main__img}
-        />
-      </div>
+      {product.map((item, idx) => (
+        <div key={idx} className={styles.main}>
+          {item.id === id && (
+            <img src={item.img} alt={item.name} className={styles.main__img} />
+          )}
+        </div>
+      ))}
     </div>
   );
 };

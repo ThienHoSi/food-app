@@ -39,7 +39,6 @@
             font-size: 2.8rem;
             font-weight: 900;
         }
-
     }
 
     .products {
@@ -58,10 +57,7 @@
             grid-template-columns: repeat(4, 1fr);
         }
 
-
-
         &__item {
-            text-decoration: none;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -73,11 +69,13 @@
             &:hover {
                 box-shadow: 0 1px 2px $primary;
                 transform: translateY(-1px);
+                cursor: pointer;
             }
 
             &__main {
                 width: 100%;
                 position: relative;
+                height: 23rem;
 
                 &__img {
                     width: 100%;
@@ -248,7 +246,6 @@
                     }
                 }
             }
-
         }
 
         &__empty {
@@ -269,6 +266,5 @@
                 margin-top: $spacing-sm;
             }
         }
-
     }
 }
