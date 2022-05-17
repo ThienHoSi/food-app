@@ -15,6 +15,7 @@ import {
   setPrevSort,
   setPrevSeletedDrop,
   setNameActive,
+  setParams,
 } from '../../Filter/FilterSlice';
 
 const Handle = () => {
@@ -37,6 +38,7 @@ const Handle = () => {
     setSearchText('');
     dispatch(setPrevSearch(params));
     dispatch(setNameActive('our-foods'));
+    dispatch(setParams(params));
   };
 
   // close sort list when user clicks outsite

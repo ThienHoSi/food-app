@@ -20,6 +20,7 @@ import {
   setPrevPrice,
   setPrevRate,
   setSelectedRadio,
+  setParams,
 } from './FilterSlice';
 
 const Filter = () => {
@@ -38,6 +39,7 @@ const Filter = () => {
     }
     dispatch(setPrevName(params));
     dispatch(setNameActive(params));
+    dispatch(setParams(null));
   };
 
   const handleOptChange = (e) => {
@@ -50,6 +52,7 @@ const Filter = () => {
     }
 
     dispatch(setPrevPrice(query));
+    dispatch(setParams(query));
   };
 
   const handleFilterByRate = (query) => {
@@ -60,6 +63,7 @@ const Filter = () => {
     }
 
     dispatch(setPrevRate(stringQuery));
+    dispatch(setParams(query));
   };
 
   return (
