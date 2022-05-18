@@ -1,0 +1,12 @@
+@import '../../styles/variables.scss';
+
+.lazyLoad {
+    width: 100%;
+    object-fit: cover;
+    filter: blur(7px);
+    transition: blur ease 0.3s;
+
+    &.active {
+        filter: blur(0);
+    }
+}

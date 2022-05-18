@@ -4,24 +4,23 @@ import styles from './ShopContent.module.scss';
 import Filter from './Filter/Filter';
 import ShopProducts from './ShopProducts/ShopProducts';
 
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { fetchPagination, fetchProducts } from './thunk';
-import { useDispatch, useSelector } from 'react-redux';
-import { nameActiveSelector } from '../../app/selectors';
 
 const ShopContent = () => {
   const dispatch = useDispatch();
-  const nameActive = useSelector(nameActiveSelector);
+  const { name } = useParams();
 
   useEffect(() => {
-    dispatch(fetchProducts({ name: nameActive }));
+    dispatch(fetchProducts({ name: name }));
     dispatch(fetchPagination());
-  }, [nameActive, dispatch]);
+  }, [name, dispatch]);
 
   return (
     <section className={styles.container}>
       <div className={styles.content}>
         <Filter />
-
         <ShopProducts />
       </div>
     </section>

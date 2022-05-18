@@ -2,16 +2,16 @@ import React from 'react';
 
 import styles from './DetailImage.module.scss';
 
-const DetailImage = ({ product, id }) => {
+const DetailImage = ({ product }) => {
+  const { img } = product ? product : '';
+
   return (
     <div className={styles.container}>
-      {product.map((item, idx) => (
-        <div key={idx} className={styles.main}>
-          {item.id === id && (
-            <img src={item.img} alt={item.name} className={styles.main__img} />
-          )}
+      {img && (
+        <div className={styles.main}>
+          <img src={product.img} alt="Food" className={styles.main__img} />
         </div>
-      ))}
+      )}
     </div>
   );
 };

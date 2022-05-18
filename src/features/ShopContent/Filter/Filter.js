@@ -76,7 +76,9 @@ const Filter = () => {
               <li
                 onClick={() => handleFilterByName(info.type)}
                 key={info.id}
-                className={styles.filter__popular__list__item}
+                className={`${styles.filter__popular__list__item} ${
+                  nameActive === info.type ? styles.active : ''
+                }`}
               >
                 <img
                   src={info.img}

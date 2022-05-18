@@ -33,6 +33,10 @@
                     margin: 4px 0;
                     border-radius: 6px;
 
+                    &.active {
+                        background-color: rgba(0, 0, 0, 0.08);
+                    }
+
                     &:first-child {
                         margin-top: 13px;
                     }

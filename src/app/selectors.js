@@ -1,7 +1,6 @@
 const productListSelector = (state) => state.shop.productList;
 const loadingStatusSelector = (state) => state.shop.status;
 const totalRowsSelector = (state) => state.shop.totalRows;
-const pageNumSelector = (state) => state.shop.pageNum;
 const detailProductSelector = (state) => state.shop.detailProduct;
 const productQntSelector = (state) => state.shop.productQnt;
 const productIdSelector = (state) => state.shop.productId;
@@ -16,11 +15,13 @@ const selectedDropSelector = (state) => state.filter.selectedDrop;
 const nameActiveSelector = (state) => state.filter.nameActive;
 const paramsSelector = (state) => state.filter.params;
 
+const relatedProductsSelector = (state) => state.detail.relatedProducts;
+const nameSelector = (state) => state.detail.name;
+
 export {
   productListSelector,
   loadingStatusSelector,
   totalRowsSelector,
-  pageNumSelector,
   detailProductSelector,
   productQntSelector,
   productIdSelector,
@@ -33,4 +34,6 @@ export {
   selectedDropSelector,
   nameActiveSelector,
   paramsSelector,
+  relatedProductsSelector,
+  nameSelector,
 };

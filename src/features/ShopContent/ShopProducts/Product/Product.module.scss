@@ -1,61 +1,9 @@
 @import './../../../../styles/variables.scss';
 
-@keyframes rotate {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
 .container {
-    min-height: 400px;
-
-    .loading {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        span {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            box-shadow: inset -2px 0 0 2px $primary;
-            animation: rotate 1.5s linear infinite;
-        }
-    }
-
-    .empty {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-
-        &__img {
-            width: 70%;
-        }
-
-        &__title {
-            font-size: 2.8rem;
-            font-weight: 900;
-        }
-    }
 
     .products {
-        margin-top: $spacing-md;
-        grid-template-columns: repeat(2, 1fr);
         width: 100%;
-        display: grid;
-        column-gap: 20px;
-        row-gap: 40px;
-
-        @include breakpoint (md) {
-            grid-template-columns: repeat(3, 1fr);
-        }
-
-        @include breakpoint(lg) {
-            grid-template-columns: repeat(4, 1fr);
-        }
 
         &__item {
             width: 100%;
@@ -206,9 +154,10 @@
                 }
 
                 &__descr {
-                    font-size: 1.5rem;
                     color: $text;
                     margin-bottom: 10px;
+                    text-align: start;
+                    font-size: 1.5rem;
                     line-height: 2rem;
                     height: 4rem;
                     display: block;
@@ -244,25 +193,6 @@
                         color: $primary;
                     }
                 }
-            }
-        }
-
-        &__empty {
-            width: 100%;
-            display: none;
-
-            &__img {
-                width: 70%;
-                margin-top: 80px;
-            }
-
-            &__title {
-                width: 100%;
-                font-size: 2.4rem;
-                font-weight: 900;
-                color: $text;
-                text-align: center;
-                margin-top: $spacing-sm;
             }
         }
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Button.module.scss';
 
@@ -8,8 +8,8 @@ const Button = ({ primary, stSize, mdSize, page, children }) => {
 
   const handleToShop = () => {
     if (page === 'shop') {
-        navigate('/shop/best-foods');
-      }
+      navigate('/shop/best-foods');
+    }
   };
 
   return (

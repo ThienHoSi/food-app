@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { detailProductSelector, nameActiveSelector } from '../../app/selectors';
+import { detailProductSelector } from '../../app/selectors';
 import { fetchProductDetail } from '../ShopContent/thunk';
 import styles from './DetailProductContent.module.scss';
 
@@ -12,21 +12,24 @@ import DetailTab from './components/DetailTab/DetailTab';
 import DetailRelated from './components/DetailRelated/DetailRelated';
 
 const DetailProductContent = () => {
-  const { id } = useParams();
+  const { name, id } = useParams();
   const dispatch = useDispatch();
   const detailProduct = useSelector(detailProductSelector);
-  const nameActive = useSelector(nameActiveSelector);
 
   useEffect(() => {
     const params = { id: id };
-    dispatch(fetchProductDetail({ name: nameActive, params }));
-  }, [id, dispatch, nameActive]);
+    dispatch(fetchProductDetail({ name: name, params }));
+  }, [id, dispatch, name]);
   return (
     <section className={styles.container}>
       <div className={styles.content}>
         <div className={styles.product}>
-          <DetailImage product={detailProduct} id={id} />
-          <DetailInfo product={detailProduct} id={id} />
+          {detailProduct && (
+            <Fragment>
+              <DetailImage product={detailProduct} />
+              <DetailInfo product={detailProduct} />
+            </Fragment>
+          )}
         </div>
         <DetailTab />
         <DetailRelated />

@@ -38,7 +38,7 @@ const HomeThump = () => {
           className={`${styles.video} ${isShow ? styles.active : ''}`}
           src="https://www.youtube.com/embed/jyMAW-1O8uI?mute=1"
           title="YouTube video player"
-          frameborder="0"
+          frameBorder="0"
           allow="fullscreen; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         ></iframe>
       </Modal>

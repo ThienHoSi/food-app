@@ -3,18 +3,35 @@ import React from 'react';
 import styles from './ShopProducts.module.scss';
 
 import Handle from './Handle/Handle';
-import Products from './Products/Products';
+import Product from './Product/Product';
 import Pagination from './Pagination/Pagination';
 import { useSelector } from 'react-redux';
-import { productListSelector } from '../../../app/selectors';
+import {
+  loadingStatusSelector,
+  productListSelector,
+} from '../../../app/selectors';
+import EmptyShop from './EmptyShop/EmptyShop';
 
 const ShopProducts = () => {
-  const products = useSelector(productListSelector);
+  const productList = useSelector(productListSelector);
+  const status = useSelector(loadingStatusSelector);
+
   return (
     <section className={styles.container}>
       <Handle />
-      <Products />
-      {products.length > 0 && <Pagination />}
+      {status === 'pending' && (
+        <div className={styles.loading}>
+          <span />
+        </div>
+      )}
+      {status === 'fulfilled' && (
+        <div className={styles.shopProducts}>
+          {productList.length <= 0 && <EmptyShop />}
+          {productList &&
+            productList.map((item, idx) => <Product key={idx} {...item} />)}
+        </div>
+      )}
+      {productList.length > 0 && <Pagination />}
     </section>
   );
 };

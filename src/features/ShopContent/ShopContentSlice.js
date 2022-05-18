@@ -11,11 +11,10 @@ export const shopContentSlice = createSlice({
   initialState: {
     status: 'idle',
     productList: [],
-    detailProduct: [],
+    detailProduct: null,
     totalRows: null,
     paginationActive: 0,
     productId: null,
-    pageNum: null,
     productQnt: 0,
   },
   reducers: {
@@ -43,12 +42,9 @@ export const shopContentSlice = createSlice({
     setProductId: (state, action) => {
       state.name = action.payload;
     },
-    setPageNum: (state, action) => {
-      state.pageNum = action.payload;
-    },
     setPaginationActive: (state, action) => {
-      state.paginationActive = action.payload
-    }
+      state.paginationActive = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,9 +55,15 @@ export const shopContentSlice = createSlice({
         state.status = 'fulfilled';
         state.productList = action.payload;
       })
+      .addCase(fetchProductQnt.pending, (state, action) => {
+        state.status = 'pending';
+      })
       .addCase(fetchProductQnt.fulfilled, (state, action) => {
         state.status = 'fulfilled';
         state.productQnt = action.payload;
+      })
+      .addCase(fetchPagination.pending, (state, action) => {
+        state.status = 'pending';
       })
       .addCase(fetchPagination.fulfilled, (state, action) => {
         state.status = 'fulfilled';
@@ -77,7 +79,7 @@ export const shopContentSlice = createSlice({
   },
 });
 
-export const { setPageNum, setSelectedDrop, sortProductsByOrder, setPaginationActive } =
+export const { setSelectedDrop, sortProductsByOrder, setPaginationActive } =
   shopContentSlice.actions;
 
 const shopContentReducer = shopContentSlice.reducer;

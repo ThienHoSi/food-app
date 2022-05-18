@@ -25,7 +25,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to="/home" replace />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/product-detail/:id" element={<DetailProduct />} />
+            <Route path="/:name/:id" element={<DetailProduct />} />
             <Route path="/shop/:name" element={<Shop />} />
           </Routes>
           <Footer />
