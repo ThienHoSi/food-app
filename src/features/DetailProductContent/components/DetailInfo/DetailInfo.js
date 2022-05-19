@@ -2,17 +2,26 @@ import React from 'react';
 
 import styles from './DetailInfo.module.scss';
 import Button from '../../../../UI/Button/Button';
+import { dataOptions } from '../../../../constants/dataOptions';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 import { CgMathMinus, CgMathPlus } from 'react-icons/cg';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { RiTruckLine, RiCalendarCheckLine } from 'react-icons/ri';
 import { GoTag } from 'react-icons/go';
 
-const DetailInfo = ({ product }) => {
-  const { name, price, dsc, country } = product ? product : '';
+const DetailInfo = (props) => {
+  const { paramName, handleFuncs, selectedRadio, product, price, qnt } = props;
+
+  const { name, dsc, rate, country } = product ? product : '';
+  const { handleOptionChange, handleDecreaseQnt, handleIncreaseQnt } =
+    handleFuncs;
+
+  const onOptionChange = (e, quantity) => {
+    handleOptionChange(e, quantity);
+  };
+
   return (
     <section className={styles.container}>
-      (
       <div className={styles.product}>
         <div className={styles.product__info}>
           <h1 className={styles.product__info__name}>{name}</h1>
@@ -21,12 +30,12 @@ const DetailInfo = ({ product }) => {
             <BsStarFill />
             <BsStarFill />
             <BsStarFill />
-            {product.rate === 5 ? <BsStarFill /> : <BsStar />}
+            {rate === 5 ? <BsStarFill /> : <BsStar />}
           </span>
           <span className={styles.product__info__price}>${price}</span>
           <div className={styles.product__info__ca}>
             <span className={styles.product__info__ca__item}>
-              Category:<strong>Best Foods</strong>
+              Category:<strong>{paramName}</strong>
             </span>
             <span className={styles.product__info__ca__item}>
               Address:<strong>{country}</strong>
@@ -37,42 +46,37 @@ const DetailInfo = ({ product }) => {
             <span className={styles.product__info__form__title}>
               Choose your options
             </span>
-            <label className={styles.product__info__form__checkbox}>
-              <input
-                className={styles.product__info__form__checkbox__input}
-                type="radio"
-                name="Radio"
-                value="Buy 2 get 15 percent off"
-              />
-              Buy 2 get 15 percent off
-            </label>
-            <label className={styles.product__info__form__checkbox}>
-              <input
-                className={styles.product__info__form__checkbox__input}
-                type="radio"
-                name="Radio"
-                value="Buy 3 get 25 percent off"
-              />
-              Buy 3 get 25 percent off
-            </label>
-            <label className={styles.product__info__form__checkbox}>
-              <input
-                className={styles.product__info__form__checkbox__input}
-                type="radio"
-                name="Radio"
-                value="Buy 5 get 50 percent off"
-              />
-              Buy 5 get 50 percent off
-            </label>
+            {dataOptions.map(({ content, quantity }) => (
+              <label
+                key={content}
+                className={styles.product__info__form__checkbox}
+              >
+                <input
+                  className={styles.product__info__form__checkbox__input}
+                  checked={selectedRadio === content}
+                  type="radio"
+                  name="Radio"
+                  value={content}
+                  onChange={(e) => onOptionChange(e, quantity)}
+                />
+                {content}
+              </label>
+            ))}
           </form>
         </div>
         <div className={styles.button}>
           <div className={styles.button__handle}>
-            <button className={styles.button__handle__decr}>
+            <button
+              onClick={handleDecreaseQnt}
+              className={styles.button__handle__decr}
+            >
               <CgMathMinus />
             </button>
-            <span className={styles.button__handle__qnt}>1</span>
-            <button className={styles.button__handle__incr}>
+            <span className={styles.button__handle__qnt}>{qnt}</span>
+            <button
+              onClick={handleIncreaseQnt}
+              className={styles.button__handle__incr}
+            >
               <CgMathPlus />
             </button>
           </div>
@@ -99,7 +103,6 @@ const DetailInfo = ({ product }) => {
           </span>
         </div>
       </div>
-      )
     </section>
   );
 };

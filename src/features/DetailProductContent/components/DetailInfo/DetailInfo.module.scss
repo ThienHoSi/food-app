@@ -25,6 +25,7 @@
             &__name {
                 font-size: 2.6rem;
                 font-weight: 900;
+                min-height: 3rem;
                 color: $text;
                 margin-bottom: $spacing-md;
 
@@ -69,6 +70,7 @@
                     strong {
                         color: $text;
                         margin-left: 4px;
+                        text-transform: capitalize;
                     }
                 }
             }

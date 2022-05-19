@@ -5,8 +5,12 @@ const useScrollTop = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
-    window.scroll(0, 0);
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth',
+    });
   }, [pathname]);
+
   return null;
 };
 

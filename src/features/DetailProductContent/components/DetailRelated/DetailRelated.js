@@ -32,22 +32,13 @@ const DetailRelated = () => {
     setProducts(randomProducts);
   }, [productList, id]);
 
-  const moveToTop = () => {
-    window.scrollTo({
-      top: 250,
-      behavior: 'smooth',
-    });
-  };
-
   return (
     <section className={styles.container}>
       <div className={styles.relatedProducts}>
         <h2 className={styles.relatedProducts__title}>Related Products</h2>
         <div className={styles.relatedProducts__content}>
           {products &&
-            products.map((item, idx) => (
-              <Product key={idx} moveToTop={moveToTop} {...item} />
-            ))}
+            products.map((item, idx) => <Product key={idx} {...item} />)}
         </div>
       </div>
     </section>

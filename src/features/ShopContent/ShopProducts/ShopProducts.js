@@ -26,7 +26,7 @@ const ShopProducts = () => {
       )}
       {status === 'fulfilled' && (
         <div className={styles.shopProducts}>
-          {productList.length <= 0 && <EmptyShop />}
+          {productList && productList.length <= 0 && <EmptyShop />}
           {productList &&
             productList.map((item, idx) => <Product key={idx} {...item} />)}
         </div>

@@ -2,14 +2,14 @@ import React, { useRef, useEffect } from 'react';
 
 import styles from './LazyLoadImage.module.scss';
 
-const LazyLoadImage = ({ url, alt }) => {
+const LazyLoadImage = ({ src, alt }) => {
   const imgRef = useRef();
   useEffect(() => {
     const img = imgRef.current;
 
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        img.setAttribute('src', url);
+        img.setAttribute('src', src);
         img.classList.add(styles.active);
       }
     });
@@ -18,7 +18,7 @@ const LazyLoadImage = ({ url, alt }) => {
     return () => {
       if (img) observer.unobserve(img);
     };
-  }, [url]);
+  }, [src]);
   return <img alt={alt} ref={imgRef} className={styles.lazyLoad} />;
 };
 

@@ -8,8 +8,8 @@ export const filterSlice = createSlice({
     prevRate: null,
     prevSearch: null,
     selectedRadio: null,
-    selectedDrop: 'Featured',
-    nameActive: 'best-foods',
+    selectedDrop: null,
+    nameActive: null,
     params: null,
   },
   reducers: {

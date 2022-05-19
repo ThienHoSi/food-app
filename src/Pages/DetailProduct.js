@@ -5,7 +5,6 @@ import useScrollTop from '../hooks/useScrollTop';
 
 const DetailProduct = () => {
   useScrollTop();
-
   return (
     <Fragment>
       <ShopBanner />

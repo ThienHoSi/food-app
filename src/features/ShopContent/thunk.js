@@ -5,7 +5,7 @@ import { setName } from '../DetailProductContent/DetailSlice';
 
 const fetchRelatedProducts = createAsyncThunk(
   'products/fetchRelatedProducts',
-  async ({name}) => {
+  async ({ name }) => {
     const res = await shopApi.getAll(name);
     return res;
   }

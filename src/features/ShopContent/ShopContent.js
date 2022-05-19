@@ -7,6 +7,12 @@ import ShopProducts from './ShopProducts/ShopProducts';
 import { useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchPagination, fetchProducts } from './thunk';
+import {
+  setPrevName,
+  setNameActive,
+  setSelectedRadio,
+  setPrevSeletedDrop,
+} from './Filter/FilterSlice';
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -15,6 +21,10 @@ const ShopContent = () => {
   useEffect(() => {
     dispatch(fetchProducts({ name: name }));
     dispatch(fetchPagination());
+    dispatch(setPrevName(null));
+    dispatch(setNameActive(name));
+    dispatch(setSelectedRadio(null));
+    dispatch(setPrevSeletedDrop('Featured'));
   }, [name, dispatch]);
 
   return (

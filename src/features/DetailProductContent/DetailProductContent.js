@@ -7,7 +7,7 @@ import { fetchProductDetail } from '../ShopContent/thunk';
 import styles from './DetailProductContent.module.scss';
 
 import DetailImage from './components/DetailImage/DetailImage';
-import DetailInfo from './components/DetailInfo/DetailInfo';
+import DetailInfo from './components/DetailInfo';
 import DetailTab from './components/DetailTab/DetailTab';
 import DetailRelated from './components/DetailRelated/DetailRelated';
 

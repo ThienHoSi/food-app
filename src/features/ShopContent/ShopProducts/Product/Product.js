@@ -5,33 +5,30 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart3, BsStarFill } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
+import LazyLoadImage from '../../../../utils/LazyLoadImage/LazyLoadImage';
 
 import { useSelector } from 'react-redux';
 import { nameActiveSelector } from '../../../../app/selectors';
 
-const Product = ({ id, img, name, dsc, price, rate, country, moveToTop }) => {
+const Product = (props) => {
   const navigate = useNavigate();
   const nameActive = useSelector(nameActiveSelector);
 
+  const { id, img, name, dsc, price, rate, country } = props;
+
   const handleToDetail = (id) => {
     navigate(`/${nameActive}/${id}`);
-    moveToTop && moveToTop();
   };
 
   return (
     <div className={styles.container}>
-      <div className={styles.products}>
+      <div id={id} className={styles.products}>
         <div className={styles.products__item}>
           <div
             className={styles.products__item__main}
             onClick={() => handleToDetail(id)}
           >
             <LazyLoadImage
-              effect="blur"
-              width="100%"
-              height="100%"
               src={img}
               alt={name}
               className={styles.products__item__main__img}

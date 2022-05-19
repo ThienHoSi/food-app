@@ -6,11 +6,8 @@ import Delivery from '../components/Delivery/Delivery';
 import HomeProducts from '../components/HomeProducts/HomeProducts';
 import HomeThump from '../components/HomeThump/HomeThump';
 import HomeWork from '../components/HomeWork/HomeWork';
-import useScrollTop from '../hooks/useScrollTop';
 
 const Home = () => {
-  useScrollTop();
-
   return (
     <Fragment>
       <Banner />

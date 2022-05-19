@@ -2,7 +2,8 @@ import React from 'react';
 
 import styles from './DetailImage.module.scss';
 
-const DetailImage = ({ product }) => {
+const DetailImage = (props) => {
+  const { product } = props;
   const { img } = product ? product : '';
 
   return (
