@@ -11,11 +11,6 @@ const fetchRelatedProducts = createAsyncThunk(
   }
 );
 
-const fetchPagination = createAsyncThunk('shop/fetchPagination', async () => {
-  const res = await shopApi.getAll('pagination');
-  return res;
-});
-
 const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async ({ name, params, page }, { dispatch, getState }) => {
@@ -52,7 +47,6 @@ const fetchProductDetail = createAsyncThunk(
 
 export {
   fetchRelatedProducts,
-  fetchPagination,
   fetchProducts,
   fetchProductQnt,
   fetchProductDetail,

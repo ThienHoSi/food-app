@@ -1,9 +1,9 @@
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 
-import styles from './ScrollTopButon.module.scss';
+import styles from './ScrollTopButton.module.scss';
 import { IoIosArrowUp } from 'react-icons/io';
 
-const ScrollTopButon = () => {
+const ScrollTopButton = () => {
   const [isShow, setIsShow] = useState(false);
 
   const handleScrollTop = () => {
@@ -13,9 +13,9 @@ const ScrollTopButon = () => {
     });
   };
 
-    window.addEventListener('scroll', () => {
-        setIsShow(window.scrollY > 800)
-    });
+  window.addEventListener('scroll', () => {
+    setIsShow(window.scrollY > 800);
+  });
 
   return (
     <button
@@ -27,4 +27,4 @@ const ScrollTopButon = () => {
   );
 };
 
-export default ScrollTopButon;
+export default ScrollTopButton;

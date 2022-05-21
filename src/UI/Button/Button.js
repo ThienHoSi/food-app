@@ -1,14 +1,20 @@
-import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { fetchProducts } from '../../features/ShopContent/thunk';
 
 import styles from './Button.module.scss';
 
-const Button = ({ primary, stSize, mdSize, page, children }) => {
+const Button = ({ primary, stSize, mdSize, page, setShow, children }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleToShop = () => {
     if (page === 'shop') {
       navigate('/shop/best-foods');
+      dispatch(fetchProducts({ name: 'best-foods' }));
+    }
+    if (setShow) {
+      setShow(false);
     }
   };
 

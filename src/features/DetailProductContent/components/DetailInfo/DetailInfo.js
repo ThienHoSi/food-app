@@ -1,5 +1,3 @@
-import React from 'react';
-
 import styles from './DetailInfo.module.scss';
 import Button from '../../../../UI/Button/Button';
 import { dataOptions } from '../../../../constants/dataOptions';

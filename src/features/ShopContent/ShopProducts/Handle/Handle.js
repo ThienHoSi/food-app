@@ -1,4 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import queryString from 'query-string';
 import { useDispatch, useSelector } from 'react-redux';
 import { sortProductsByOrder } from '../../ShopContentSlice';
 
@@ -14,7 +16,6 @@ import {
   onSearch,
   setPrevSort,
   setPrevSeletedDrop,
-  setNameActive,
   setParams,
 } from '../../Filter/FilterSlice';
 
@@ -26,6 +27,7 @@ const Handle = () => {
   const ref = useRef();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     dispatch(onSearch());
@@ -34,10 +36,17 @@ const Handle = () => {
     if (!searchText) return;
 
     const params = { name_like: searchText };
-    dispatch(fetchProducts({ name: 'our-foods', params }));
+    dispatch(fetchProducts({ name: 'our-foods', params })).then(() => {
+      navigate({
+        pathname: `/shop/our-foods`,
+        search: queryString.stringify({
+          _limit: 16,
+          ...params,
+        }),
+      });
+    });
     setSearchText('');
     dispatch(setPrevSearch(params));
-    dispatch(setNameActive('our-foods'));
     dispatch(setParams(params));
   };
 

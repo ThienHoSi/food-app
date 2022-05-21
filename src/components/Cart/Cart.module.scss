@@ -6,7 +6,7 @@
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 999;
   display: flex;
   flex-direction: row-reverse;
   transform: translateX(100%);
@@ -76,7 +76,8 @@
 
     &__empty {
       margin-top: 40px;
-      display: flex;
+      // display: flex;
+      display: none;
       flex-direction: column;
       align-items: center;
 
@@ -115,7 +116,7 @@
     }
 
     &__box {
-      display: none;
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
@@ -128,9 +129,9 @@
         padding: 20px 16px;
         margin-bottom: auto;
         overflow-y: auto;
-        
+
         &::-webkit-scrollbar {
-            display: none;
+          display: none;
         }
 
         &__item {
@@ -223,9 +224,9 @@
         }
 
         &__footer {
-            position: relative;
-            top: -64px;
-            background-color: $white;
+          position: relative;
+          top: -64px;
+          background-color: $white;
           display: flex;
           flex-direction: column;
           justify-content: space-between;

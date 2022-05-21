@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import queryString from 'query-string';
 
 import './Pagination.scss';
 import ReactPaginate from 'react-paginate';
@@ -7,46 +8,56 @@ import { useDispatch, useSelector } from 'react-redux';
 import { onPagination } from '../../Filter/FilterSlice';
 import { fetchProductQnt, fetchProducts } from '../../thunk';
 import {
-  nameActiveSelector,
   paginationActiveSelector,
   paramsSelector,
   prevPriceSelector,
   prevRateSelector,
   prevSearchSelector,
   productQntSelector,
-  totalRowsSelector,
 } from '../../../../app/selectors';
+import { ApiContext } from '../../../../Context/ApiContext';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Pagination = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { name } = useParams();
+  const totalRows = useContext(ApiContext);
 
   const params = useSelector(paramsSelector);
-  const nameActive = useSelector(nameActiveSelector);
   const prevPrice = useSelector(prevPriceSelector);
   const prevRate = useSelector(prevRateSelector);
   const prevSearch = useSelector(prevSearchSelector);
-  const totalRows = useSelector(totalRowsSelector);
   const productQnt = useSelector(productQntSelector);
   const paginationActive = useSelector(paginationActiveSelector);
 
   let maxPage;
   if (prevPrice || prevRate || prevSearch) {
     maxPage = Math.ceil(productQnt / 16);
-  } else if (totalRows && nameActive) {
-    maxPage = Math.ceil(totalRows[nameActive] / 16);
+  } else if (totalRows && name) {
+    maxPage = Math.ceil(totalRows[name] / 16);
   }
 
   useEffect(() => {
     const params = prevPrice || JSON.parse(prevRate) || prevSearch;
     if (prevPrice || prevRate || prevSearch) {
-      dispatch(fetchProductQnt({ name: nameActive, params }));
+      dispatch(fetchProductQnt({ name: name, params }));
     }
-  }, [dispatch, nameActive, prevPrice, prevRate, prevSearch]);
+  }, [dispatch, name, prevPrice, prevRate, prevSearch]);
 
   const handlePagination = (page) => {
     const { selected } = page;
+    let curPage = selected + 1;
     dispatch(onPagination());
-    dispatch(fetchProducts({ name: nameActive, params, page: selected + 1 }));
+    dispatch(fetchProducts({ name: name, params, page: curPage })).then(() => {
+      navigate({
+        search: queryString.stringify({
+          _limit: 16,
+          ...params,
+          _page: curPage,
+        }),
+      });
+    });
   };
 
   return (

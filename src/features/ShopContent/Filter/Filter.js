@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from 'react-redux';
-
-import { fetchProducts } from '../thunk';
+import queryString from 'query-string';
 
 import styles from './Filter.module.scss';
+import { fetchProducts } from '../thunk';
 import { BsStarFill, BsStar } from 'react-icons/bs';
 import { shopFilterInfo } from '../../../constants/shopFilterInfo';
 import { priceOptions } from '../../../constants/priceOptions';
@@ -22,9 +22,12 @@ import {
   setSelectedRadio,
   setParams,
 } from './FilterSlice';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Filter = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { name } = useParams();
 
   const prevName = useSelector(prevNameSelector);
   const prevPrice = useSelector(prevPriceSelector);
@@ -34,7 +37,14 @@ const Filter = () => {
 
   const handleFilterByName = (params) => {
     if (params !== prevName) {
-      dispatch(fetchProducts({ name: params }));
+      dispatch(fetchProducts({ name: params })).then(() =>
+        navigate({
+          pathname: `/shop/${params}`,
+          search: queryString.stringify({
+            _limit: 16,
+          }),
+        })
+      );
       dispatch(setSelectedRadio(null));
     }
     dispatch(setPrevName(params));
@@ -48,7 +58,15 @@ const Filter = () => {
 
   const handleFilterByPrice = (query) => {
     if (prevPrice !== query) {
-      dispatch(fetchProducts({ name: nameActive, params: query }));
+      dispatch(fetchProducts({ name: nameActive, params: query })).then(() =>
+        navigate({
+          pathname: `/shop/${name}`,
+          search: queryString.stringify({
+            _limit: 16,
+            ...query,
+          }),
+        })
+      );
     }
 
     dispatch(setPrevPrice(query));
@@ -59,7 +77,15 @@ const Filter = () => {
     const stringQuery = JSON.stringify(query);
 
     if (prevRate !== stringQuery) {
-      dispatch(fetchProducts({ name: nameActive, params: query }));
+      dispatch(fetchProducts({ name: nameActive, params: query })).then(() => {
+        navigate({
+          pathname: `/shop/${name}`,
+          search: queryString.stringify({
+            _limit: 16,
+            ...query,
+          }),
+        });
+      });
     }
 
     dispatch(setPrevRate(stringQuery));

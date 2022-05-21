@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  fetchPagination,
   fetchProducts,
   fetchProductDetail,
   fetchProductQnt,
@@ -12,7 +11,6 @@ export const shopContentSlice = createSlice({
     status: 'idle',
     productList: [],
     detailProduct: null,
-    totalRows: null,
     paginationActive: 0,
     productId: null,
     productQnt: 0,
@@ -55,19 +53,9 @@ export const shopContentSlice = createSlice({
         state.status = 'fulfilled';
         state.productList = action.payload;
       })
-      .addCase(fetchProductQnt.pending, (state, action) => {
-        state.status = 'pending';
-      })
       .addCase(fetchProductQnt.fulfilled, (state, action) => {
         state.status = 'fulfilled';
         state.productQnt = action.payload;
-      })
-      .addCase(fetchPagination.pending, (state, action) => {
-        state.status = 'pending';
-      })
-      .addCase(fetchPagination.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
-        state.totalRows = action.payload;
       })
       .addCase(fetchProductDetail.pending, (state, action) => {
         state.status = 'pending';

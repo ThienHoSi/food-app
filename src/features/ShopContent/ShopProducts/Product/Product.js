@@ -1,23 +1,18 @@
-import React from 'react';
-
 import styles from './Product.module.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart3, BsStarFill } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
 import LazyLoadImage from '../../../../utils/LazyLoadImage/LazyLoadImage';
 
-import { useSelector } from 'react-redux';
-import { nameActiveSelector } from '../../../../app/selectors';
-
 const Product = (props) => {
   const navigate = useNavigate();
-  const nameActive = useSelector(nameActiveSelector);
+  const params = useParams();
 
   const { id, img, name, dsc, price, rate, country } = props;
 
   const handleToDetail = (id) => {
-    navigate(`/${nameActive}/${id}`);
+    navigate(`/${params.name}/${id}`);
   };
 
   return (

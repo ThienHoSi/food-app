@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
 import ShopBanner from '../components/ShopBanner/ShopBanner';
 import ShopContent from '../features/ShopContent/ShopContent';
-import useScrollTop from '../hooks/useScrollTop';
+// import useScrollTop from '../hooks/useScrollTop';
 
 const Shop = () => {
-  useScrollTop();
+  // useScrollTop();
 
   return (
     <Fragment>

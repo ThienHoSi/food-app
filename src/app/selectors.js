@@ -1,6 +1,5 @@
 const productListSelector = (state) => state.shop.productList;
 const loadingStatusSelector = (state) => state.shop.status;
-const totalRowsSelector = (state) => state.shop.totalRows;
 const detailProductSelector = (state) => state.shop.detailProduct;
 const productQntSelector = (state) => state.shop.productQnt;
 const productIdSelector = (state) => state.shop.productId;
@@ -21,7 +20,6 @@ const nameSelector = (state) => state.detail.name;
 export {
   productListSelector,
   loadingStatusSelector,
-  totalRowsSelector,
   detailProductSelector,
   productQntSelector,
   productIdSelector,
@@ -35,5 +33,5 @@ export {
   nameActiveSelector,
   paramsSelector,
   relatedProductsSelector,
-  nameSelector,
+  nameSelector
 };
