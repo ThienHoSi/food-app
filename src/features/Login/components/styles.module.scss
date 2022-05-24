@@ -1,0 +1,42 @@
+@import '../../../styles/variables.scss';
+
+.form {
+
+    &__remember {
+        display: flex;
+        align-items: center;
+        margin-bottom: $spacing-md;
+
+        &__label {
+            font-size: 1.3rem;
+            color: rgba(0, 0, 0, 0.4);
+
+        }
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        outline: none;
+        margin: 0 auto;
+        width: 300px;
+        height: 42px;
+        border-radius: 999px;
+        background-color: $primary;
+        color: $white;
+        font-weight: 700;
+        font-size: 1.4rem;
+        box-shadow: 0 3px 8px rgba($color: $black, $alpha: 0.2);
+        padding: 8px $spacing-sm;
+        transition: all ease 0.3s;
+        text-transform: uppercase;
+
+        &:hover {
+            box-shadow: 0 5px 10px rgba($color: $black, $alpha: 0.25);
+            filter: brightness(92%);
+            cursor: pointer;
+        }
+    }
+}

@@ -11,9 +11,10 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import ApiProvider from './Context/ApiContext';
 
-const DetailProduct = lazy(() => import('./Pages/DetailProduct'));
-const Home = lazy(() => import('./Pages/Home'));
-const Shop = lazy(() => import('./Pages/Shop'));
+// const DetailProduct = lazy(() => import('./Pages/DetailProduct'));
+// const Home = lazy(() => import('./Pages/Home'));
+// const Shop = lazy(() => import('./Pages/Shop'));
+const LoginPage = lazy(() => import('./Pages/LoginPage'));
 
 function App() {
   return (
@@ -24,9 +25,10 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<Navigate to="/home" replace />} />
-              <Route path="/home" element={<Home />} />
+              {/* <Route path="/home" element={<Home />} />
               <Route path="/shop/:name" element={<Shop />} />
-              <Route path="/:name/:id" element={<DetailProduct />} />
+              <Route path="/:name/:id" element={<DetailProduct />} /> */}
+              <Route path="/login" element={<LoginPage />} />
             </Routes>
             <Footer />
             <ScrollTopButton />
