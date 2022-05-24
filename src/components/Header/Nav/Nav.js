@@ -1,30 +1,42 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import styles from './Nav.module.scss';
 import { TiHome } from 'react-icons/ti';
 import { GiKnifeFork } from 'react-icons/gi';
 
-const Nav = ({ isMenu }) => {
+const Nav = ({ isMenu, setOpen }) => {
+  const navigate = useNavigate();
+
+  const handleToHome = () => {
+    navigate('/home');
+    if (isMenu) {
+      setOpen(false);
+    }
+  };
+
+  const handleToShop = () => {
+    navigate('/shop/best-foods');
+    if (isMenu) {
+      setOpen(false);
+    }
+  };
+
   return (
     <nav className={isMenu ? styles.menu__nav : styles.nav}>
       <ul>
-        <Link to="/home">
-          <li>
+          <li onClick={handleToHome}>
             <span>
               <TiHome />
             </span>
             Home
           </li>
-        </Link>
-        <Link to="/shop/best-foods">
-          <li>
-            <span>
-              <GiKnifeFork />
-            </span>
-            Order Online
-          </li>
-        </Link>
+        <li onClick={handleToShop}>
+          <span>
+            <GiKnifeFork />
+          </span>
+          Order Online
+        </li>
       </ul>
     </nav>
   );

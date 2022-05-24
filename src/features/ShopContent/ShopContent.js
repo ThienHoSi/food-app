@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import queryString from 'query-string';
 import styles from './ShopContent.module.scss';
 import Filter from './Filter/Filter';
@@ -6,12 +6,18 @@ import ShopProducts from './ShopProducts/ShopProducts';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { fetchProducts } from './thunk';
+import { AuthContext } from '../../Context/AuthContext';
 
 const ShopContent = () => {
   const dispatch = useDispatch();
   const { name } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const { setHasHeader } = useContext(AuthContext);
+
+  useEffect(() => {
+    setHasHeader(true);
+  }, [setHasHeader]);
 
   useEffect(() => {
     const param = location.search;

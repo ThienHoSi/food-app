@@ -65,6 +65,10 @@ const DetailMain = (props) => {
     setPrevId(id);
   }, [id, price, prevId, qnt]);
 
+  // const handleAddToFirestore = () => {
+
+  // }
+
   return (
     <DetailInfo
       paramName={paramName}

@@ -1,15 +1,25 @@
+import { useContext } from 'react';
 import styles from './Product.module.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart3, BsStarFill } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
 import LazyLoadImage from '../../../../utils/LazyLoadImage/LazyLoadImage';
+import { AuthContext } from '../../../../Context/AuthContext';
 
 const Product = (props) => {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const params = useParams();
 
-  const { id, img, name, dsc, price, rate, country } = props;
+  const { id, img, name, dsc, price, rate, country, openDialog } = props;
+
+  const handleAddToFirestore = () => {
+    if (!user) {
+      openDialog();
+      return;
+    }
+  };
 
   const handleToDetail = (id) => {
     navigate(`/${params.name}/${id}`);
@@ -38,7 +48,7 @@ const Product = (props) => {
             <button>
               <AiOutlineHeart />
             </button>
-            <button>
+            <button onClick={handleAddToFirestore}>
               <BsCart3 />
             </button>
           </div>

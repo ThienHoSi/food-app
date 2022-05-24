@@ -1,13 +1,19 @@
-import styles from './Login.module.scss';
-import './Login.scss';
-import { FcGoogle } from 'react-icons/fc';
+import { signInWithPopup } from 'firebase/auth';
+import { useContext, useEffect } from 'react';
 import { AiFillFacebook } from 'react-icons/ai';
-import loginThumpSVG from '../../assets/img/svg/loginThump.svg';
+import { FcGoogle } from 'react-icons/fc';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import loginThumpSVG from '../../assets/img/svg/loginThump.svg';
+import { auth, fbProvider, ggProvider } from '../../configs/firebaseConfig';
+import { AuthContext } from '../../Context/AuthContext';
 import LoginForm from './components';
+import styles from './Login.module.scss';
+import './Login.scss';
 
 const Login = () => {
+  const { setHasHeader } = useContext(AuthContext);
+
   const handleClosedFeature = () => {
     toast.info(
       'This feature is currently closed. Try login with Google or Facebook',
@@ -19,6 +25,18 @@ const Login = () => {
       }
     );
   };
+
+  const handleFbLogin = () => {
+    signInWithPopup(auth, fbProvider);
+  };
+  const handleGgLogin = () => {
+    signInWithPopup(auth, ggProvider);
+  };
+
+  useEffect(() => {
+    setHasHeader(false);
+  }, [setHasHeader]);
+
   return (
     <div className={styles.container}>
       <ToastContainer />
@@ -41,11 +59,17 @@ const Login = () => {
             <span className={styles.login__separate__text}>OR</span>
           </div>
           <div className={styles.login__socials}>
-            <button className={styles.login__socials__btn}>
+            <button
+              onClick={handleGgLogin}
+              className={styles.login__socials__btn}
+            >
               <FcGoogle />
               Log in with Google
             </button>
-            <button className={styles.login__socials__btn}>
+            <button
+              onClick={handleFbLogin}
+              className={styles.login__socials__btn}
+            >
               <AiFillFacebook />
               Log in with Facebook
             </button>

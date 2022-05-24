@@ -1,18 +1,30 @@
-import styles from './DetailInfo.module.scss';
-import Button from '../../../../UI/Button/Button';
-import { dataOptions } from '../../../../constants/dataOptions';
-import { BsStarFill, BsStar } from 'react-icons/bs';
-import { CgMathMinus, CgMathPlus } from 'react-icons/cg';
+import { useContext, useState } from 'react';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { RiTruckLine, RiCalendarCheckLine } from 'react-icons/ri';
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import { CgMathMinus, CgMathPlus } from 'react-icons/cg';
 import { GoTag } from 'react-icons/go';
+import { RiCalendarCheckLine, RiTruckLine } from 'react-icons/ri';
+import Dialog from '../../../../components/Dialog';
+import { dataOptions } from '../../../../constants/dataOptions';
+import { AuthContext } from '../../../../Context/AuthContext';
+import styles from './DetailInfo.module.scss';
 
 const DetailInfo = (props) => {
+  const [isShowDialog, setIsShowDialog] = useState(false);
+  const { user } = useContext(AuthContext);
+
   const { paramName, handleFuncs, selectedRadio, product, price, qnt } = props;
 
   const { name, dsc, rate, country } = product ? product : '';
   const { handleOptionChange, handleDecreaseQnt, handleIncreaseQnt } =
     handleFuncs;
+
+  const onHandleAddToFirestore = () => {
+    if (!user) {
+      setIsShowDialog(true);
+      return;
+    }
+  };
 
   const onOptionChange = (e, quantity) => {
     handleOptionChange(e, quantity);
@@ -79,9 +91,12 @@ const DetailInfo = (props) => {
             </button>
           </div>
           <div className={styles.button__add}>
-            <Button primary mdSize>
+            <button
+              onClick={onHandleAddToFirestore}
+              className={styles.button__add__cart}
+            >
               ADD TO CART
-            </Button>
+            </button>
             <button className={styles.button__add__like}>
               <AiOutlineHeart />
             </button>
@@ -101,6 +116,7 @@ const DetailInfo = (props) => {
           </span>
         </div>
       </div>
+      <Dialog isShow={isShowDialog} setIsShow={setIsShowDialog} />
     </section>
   );
 };

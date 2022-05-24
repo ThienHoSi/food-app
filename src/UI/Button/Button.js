@@ -9,7 +9,7 @@ const Button = ({ primary, stSize, mdSize, page, setShow, children }) => {
   const dispatch = useDispatch();
 
   const handleToShop = () => {
-    if (page === 'shop') {
+    if (page && page === 'shop') {
       navigate('/shop/best-foods');
       dispatch(fetchProducts({ name: 'best-foods' }));
     }

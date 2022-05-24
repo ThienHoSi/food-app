@@ -1,5 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
-
+import { Fragment, useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { detailProductSelector } from '../../app/selectors';
@@ -10,11 +9,17 @@ import DetailImage from './components/DetailImage/DetailImage';
 import DetailInfo from './components/DetailInfo';
 import DetailTab from './components/DetailTab/DetailTab';
 import DetailRelated from './components/DetailRelated/DetailRelated';
+import { AuthContext } from '../../Context/AuthContext';
 
 const DetailProductContent = () => {
   const { name, id } = useParams();
   const dispatch = useDispatch();
   const detailProduct = useSelector(detailProductSelector);
+  const { setHasHeader } = useContext(AuthContext);
+
+  useEffect(() => {
+    setHasHeader(true);
+  }, [setHasHeader]);
 
   useEffect(() => {
     const params = { id: id };

@@ -1,20 +1,44 @@
-import React, { useEffect, useState } from 'react';
-
-import styles from './Header.module.scss';
-import { CgMenuLeft, CgClose } from 'react-icons/cg';
-import { MdAccountCircle, MdShoppingCart } from 'react-icons/md';
-import { RiLogoutBoxRLine, RiAccountPinBoxFill } from 'react-icons/ri';
+import { signOut } from 'firebase/auth';
+import React, { useContext, useEffect, useState } from 'react';
 import { AiOutlineTags } from 'react-icons/ai';
-import Nav from './Nav/Nav';
+import { CgClose, CgMenuLeft } from 'react-icons/cg';
+import { MdAccountCircle, MdShoppingCart } from 'react-icons/md';
+import { RiAccountPinBoxFill, RiLogoutBoxRLine } from 'react-icons/ri';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../configs/firebaseConfig';
+import { AuthContext } from '../../Context/AuthContext';
+import useWindowSize from '../../hooks/useWindowSize';
 import Logo from '../../UI/Logo/Logo';
 import Cart from '../Cart/Cart';
-import useWindowSize from '../../hooks/useWindowSize';
+import styles from './Header.module.scss';
+import Nav from './Nav/Nav';
+import Dialog from '../Dialog';
 
 const Header = () => {
+  const { user, setUser, hasHeader } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCart, setShowCart] = useState(false);
   const [headerActive, setHeaderActive] = useState(false);
+  const [isShowDialog, setIsShowDialog] = useState(false);
+
   const size = useWindowSize();
+  const navigate = useNavigate();
+
+  const ToggleCart = () => {
+    user && setShowCart(true);
+    !user && setIsShowDialog(true);
+  };
+
+  const handleToLoginPage = () => {
+    navigate('/login');
+    setMenuOpen(false);
+  };
+
+  const handleLogOut = () => {
+    signOut(auth).then(() => {
+      setUser(false);
+    });
+  };
 
   useEffect(() => {
     if (size.width > 768 && menuOpen) {
@@ -47,20 +71,46 @@ const Header = () => {
   );
 
   return (
-    <header className={`${styles.header} ${headerActive && styles.active}`}>
+    <header
+      className={`${styles.header} ${headerActive && styles.active}`}
+      style={{ display: hasHeader ? 'flex' : 'none' }}
+    >
       <div className={styles.header__menu}>
         <div className={styles.header__menu__toggle}>{menuToggle}</div>
         <aside
           className={`${styles.header__menu__nav} ${menuOpen && styles.show}`}
         >
-          <div className={styles.header__menu__nav__account}>
-            <a href="/">
-              <MdAccountCircle />
-              Sign In
-            </a>
-            {/* <span>Log Out</span> */}
-          </div>
-          <Nav isMenu />
+          {user ? (
+            <div className={styles.header__menu__nav__account}>
+              <div className={styles.header__menu__nav__account__user}>
+                <img
+                  src={user.photoURL}
+                  alt="avatar"
+                  className={styles.header__menu__nav__account__user__avatar}
+                />
+                <span className={styles.header__menu__nav__account__user__name}>
+                  {user.displayName}
+                </span>
+              </div>
+              <span
+                onClick={handleLogOut}
+                className={styles.header__menu__nav__account__logout}
+              >
+                Log Out
+              </span>
+            </div>
+          ) : (
+            <div className={styles.header__menu__nav__account}>
+              <span
+                onClick={handleToLoginPage}
+                className={styles.header__menu__nav__account__signin}
+              >
+                <MdAccountCircle />
+                Sign In
+              </span>
+            </div>
+          )}
+          <Nav isMenu setOpen={setMenuOpen} />
         </aside>
       </div>
       <div className={styles.header__grid}>
@@ -73,32 +123,48 @@ const Header = () => {
         <div className={styles.header__grid__right}>
           <div
             className={styles.header__grid__right__cart}
-            onClick={() => setShowCart(true)}
+            onClick={ToggleCart}
           >
             <MdShoppingCart />
             <div className={styles.header__grid__right__cart__qnt}>0</div>
           </div>
-          <a href="/" className={styles.header__grid__right__account}>
-            <MdAccountCircle />
-            <span>Sign In</span>
-            <ul className={styles.header__grid__right__account__info}>
-              <li>
-                <RiAccountPinBoxFill />
-                <span>My account</span>
-              </li>
-              <li>
-                <AiOutlineTags />
-                <span>My cart</span>
-              </li>
-              <li>
-                <RiLogoutBoxRLine />
-                <span>Logout</span>
-              </li>
-            </ul>
-          </a>
+          {user ? (
+            <div className={styles.header__grid__right__account}>
+              <img
+                src={user.photoURL}
+                alt="avatar"
+                className={styles.header__grid__right__account__avatar}
+              />
+              <div className={styles.header__grid__right__account__name}>
+                {user.displayName}
+              </div>
+              <ul className={styles.header__grid__right__account__info}>
+                <li>
+                  <RiAccountPinBoxFill />
+                  <span>My account</span>
+                </li>
+                <li>
+                  <AiOutlineTags />
+                  <span>My cart</span>
+                </li>
+                <li onClick={handleLogOut}>
+                  <RiLogoutBoxRLine />
+                  <span>Logout</span>
+                </li>
+              </ul>
+            </div>
+          ) : (
+            <div>
+              <Link to="/login" className={styles.header__grid__right__account}>
+                <MdAccountCircle />
+                <span>Sign In</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
       <Cart show={showCart} setShow={setShowCart} />
+      <Dialog isShow={isShowDialog} setIsShow={setIsShowDialog} />
     </header>
   );
 };
