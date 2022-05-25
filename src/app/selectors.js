@@ -17,6 +17,8 @@ const paramsSelector = (state) => state.filter.params;
 const relatedProductsSelector = (state) => state.detail.relatedProducts;
 const nameSelector = (state) => state.detail.name;
 
+const cartProductsSelector = (state) => state.cart;
+
 export {
   productListSelector,
   loadingStatusSelector,
@@ -33,5 +35,6 @@ export {
   nameActiveSelector,
   paramsSelector,
   relatedProductsSelector,
-  nameSelector
+  nameSelector,
+  cartProductsSelector,
 };

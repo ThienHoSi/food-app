@@ -1,24 +1,43 @@
 import { useContext } from 'react';
-import styles from './Product.module.scss';
-import { useNavigate, useParams } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart3, BsStarFill } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
-import LazyLoadImage from '../../../../utils/LazyLoadImage/LazyLoadImage';
+import { useNavigate, useParams } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { AuthContext } from '../../../../Context/AuthContext';
+import useFirestoreProducts from '../../../../hooks/useFirestoreProducts';
+import LazyLoadImage from '../../../../utils/LazyLoadImage/LazyLoadImage';
+import styles from './Product.module.scss';
 
 const Product = (props) => {
-  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const params = useParams();
+
+  const { user } = useContext(AuthContext);
+  const { addToFirestore } = useFirestoreProducts();
 
   const { id, img, name, dsc, price, rate, country, openDialog } = props;
 
   const handleAddToFirestore = () => {
+    const productInfo = { id, img, name, dsc, price, country };
+
     if (!user) {
       openDialog();
       return;
     }
+
+    addToFirestore(user.uid, {
+      productInfo,
+      action: 'increase',
+    });
+
+    toast.success('The product has been added to cart', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: true,
+      pauseOnHover: false,
+    });
   };
 
   const handleToDetail = (id) => {
@@ -27,6 +46,7 @@ const Product = (props) => {
 
   return (
     <div className={styles.container}>
+      <ToastContainer />
       <div id={id} className={styles.products}>
         <div className={styles.products__item}>
           <div

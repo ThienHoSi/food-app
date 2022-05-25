@@ -8,8 +8,8 @@ import {
 import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyCs7fRDkX7NUqOsPysrC3Qfe0AOsNMjQ-M',
-  authDomain: 'food-appl.firebaseapp.com',
+  apiKey: process.env.REACT_APP_FIREBASE_API,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
   projectId: 'food-appl',
   storageBucket: 'food-appl.appspot.com',
   messagingSenderId: '349694974343',

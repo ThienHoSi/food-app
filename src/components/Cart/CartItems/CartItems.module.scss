@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+
+.products {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    padding: 20px 16px;
+    margin-bottom: auto;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}

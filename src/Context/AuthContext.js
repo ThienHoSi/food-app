@@ -1,18 +1,19 @@
 import { onAuthStateChanged } from 'firebase/auth';
 import { createContext, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { auth } from '../configs/firebaseConfig';
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const [hasHeader, setHasHeader] = useState(true);
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubcribed = onAuthStateChanged(auth, (user) => {
-      console.log({ user });
       if (user) {
         const { displayName, email, uid, photoURL } = user;
         setUser({
@@ -21,13 +22,16 @@ const AuthProvider = ({ children }) => {
           uid,
           photoURL,
         });
-        navigate('/home');
+
+        if (pathname.includes('login')) {
+          navigate('/home');
+        }
       }
     });
     return () => {
       unsubcribed();
     };
-  }, [navigate]);
+  }, [navigate, pathname]);
 
   return (
     <AuthContext.Provider value={{ user, setUser, hasHeader, setHasHeader }}>

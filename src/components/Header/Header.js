@@ -9,7 +9,7 @@ import { auth } from '../../configs/firebaseConfig';
 import { AuthContext } from '../../Context/AuthContext';
 import useWindowSize from '../../hooks/useWindowSize';
 import Logo from '../../UI/Logo/Logo';
-import Cart from '../Cart/Cart';
+import Cart from '../Cart';
 import styles from './Header.module.scss';
 import Nav from './Nav/Nav';
 import Dialog from '../Dialog';
