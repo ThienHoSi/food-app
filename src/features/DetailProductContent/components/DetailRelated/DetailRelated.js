@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
-
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import styles from './DetailRelated.module.scss';
-import { relatedProductsSelector } from '../../../../app/selectors';
 import { useParams } from 'react-router-dom';
-import { fetchRelatedProducts } from '../../../ShopContent/thunk';
+import { relatedProductsSelector } from '../../../../app/selectors';
 import Product from '../../../ShopContent/ShopProducts/Product/Product';
+import { fetchRelatedProducts } from '../../../ShopContent/thunk';
+import styles from './DetailRelated.module.scss';
+import Dialog from '../../../../components/Dialog';
 
 const DetailRelated = () => {
   const dispatch = useDispatch();
 
-  const productList = useSelector(relatedProductsSelector);
   const [products, setProducts] = useState([]);
+  const [isShowDialog, setIsShowDialog] = useState(false);
+  const productList = useSelector(relatedProductsSelector);
   const { name, id } = useParams();
+
+  const openDialog = () => {
+    setIsShowDialog(true);
+  };
 
   useEffect(() => {
     dispatch(fetchRelatedProducts({ name: name }));
@@ -38,9 +43,12 @@ const DetailRelated = () => {
         <h2 className={styles.relatedProducts__title}>Related Products</h2>
         <div className={styles.relatedProducts__content}>
           {products &&
-            products.map((item, idx) => <Product key={idx} {...item} />)}
+            products.map((item, idx) => (
+              <Product openDialog={openDialog} key={idx} {...item} />
+            ))}
         </div>
       </div>
+      <Dialog isShow={isShowDialog} setIsShow={setIsShowDialog} />
     </section>
   );
 };

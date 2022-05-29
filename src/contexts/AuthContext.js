@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
         });
 
         if (pathname.includes('login')) {
-          navigate('/home');
+          navigate(-1);
         }
       }
     });

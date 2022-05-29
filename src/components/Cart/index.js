@@ -4,6 +4,7 @@ import { CgClose } from 'react-icons/cg';
 import { MdShoppingCart } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { cartProductsSelector } from '../../app/selectors';
 import { db } from '../../configs/firebaseConfig';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -21,6 +22,19 @@ const Cart = ({ show, setShow }) => {
   const overlayRef = useRef();
 
   const totalPrice = usePrice();
+
+  const handleClosedFeature = () => {
+    toast.info('This feature is currently closed', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      progress: undefined,
+      draggable: true,
+      closeOnClick: true,
+      theme: 'colored',
+    });
+  };
 
   useEffect(() => {
     const clickOnOverlay = (e) => {
@@ -85,7 +99,10 @@ const Cart = ({ show, setShow }) => {
             <span>Total</span>
             <span>${totalPrice}</span>
           </div>
-          <div className={styles.cart__footer__btns}>
+          <div
+            onClick={handleClosedFeature}
+            className={styles.cart__footer__btns}
+          >
             <Button primary>
               <MdShoppingCart style={{ fontSize: '2rem', padding: 2 }} />
               checkout
