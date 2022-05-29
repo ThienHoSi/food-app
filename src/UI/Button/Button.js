@@ -4,7 +4,15 @@ import { fetchProducts } from '../../features/ShopContent/thunk';
 
 import styles from './Button.module.scss';
 
-const Button = ({ primary, stSize, mdSize, page, setShow, children }) => {
+const Button = ({
+  primary,
+  stSize,
+  mdSize,
+  depSize,
+  page,
+  setShow,
+  children,
+}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,7 +31,7 @@ const Button = ({ primary, stSize, mdSize, page, setShow, children }) => {
       onClick={handleToShop}
       className={`${styles.button} ${primary ? styles.primary : ''} ${
         stSize ? styles.stSize : ''
-      } ${mdSize ? styles.mdSize : ''}`}
+      } ${mdSize ? styles.mdSize : ''} ${depSize ? styles.depSize : ''}`}
     >
       {children}
     </button>

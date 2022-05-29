@@ -1,23 +1,17 @@
-import { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import queryString from 'query-string';
-import { useDispatch, useSelector } from 'react-redux';
-import { sortProductsByOrder } from '../../ShopContentSlice';
-
-import styles from './Handle.module.scss';
+import { useEffect, useRef, useState } from 'react';
 import { AiOutlineSearch } from 'react-icons/ai';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-import { dataTypes } from '../../../../constants/handleDataTypes';
-
-import { fetchProducts } from '../../thunk';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { selectedDropSelector } from '../../../../app/selectors';
+import { dataTypes } from '../../../../constants/handleDataTypes';
 import {
-  setPrevSearch,
-  onSearch,
-  setPrevSort,
-  setPrevSeletedDrop,
-  setParams,
+  onSearch, setParams, setPrevSearch, setPrevSeletedDrop, setPrevSort
 } from '../../Filter/FilterSlice';
+import { sortProductsByOrder } from '../../ShopContentSlice';
+import { fetchProducts } from '../../thunk';
+import styles from './Handle.module.scss';
 
 const Handle = () => {
   const selectedDrop = useSelector(selectedDropSelector);

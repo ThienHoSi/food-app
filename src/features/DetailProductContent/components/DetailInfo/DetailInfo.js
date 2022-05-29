@@ -4,16 +4,31 @@ import { BsStar, BsStarFill } from 'react-icons/bs';
 import { CgMathMinus, CgMathPlus } from 'react-icons/cg';
 import { GoTag } from 'react-icons/go';
 import { RiCalendarCheckLine, RiTruckLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
+import { detailProductStatusSelector } from '../../../../app/selectors';
 import Dialog from '../../../../components/Dialog';
 import { dataOptions } from '../../../../constants/dataOptions';
-import { AuthContext } from '../../../../Context/AuthContext';
+import { AuthContext } from '../../../../contexts/AuthContext';
 import styles from './DetailInfo.module.scss';
+import ContentLoader from 'react-content-loader';
+import Button from '../../../../UI/Button/Button';
 
 const DetailInfo = (props) => {
   const [isShowDialog, setIsShowDialog] = useState(false);
   const { user } = useContext(AuthContext);
+  const status = useSelector(detailProductStatusSelector);
 
-  const { paramName, handleFuncs, selectedRadio, product, price, qnt } = props;
+  const {
+    paramName,
+    handleFuncs,
+    selectedRadio,
+    product,
+    price,
+    qnt,
+    handleAddToFirestore,
+  } = props;
 
   const { name, dsc, rate, country } = product ? product : '';
   const { handleOptionChange, handleDecreaseQnt, handleIncreaseQnt } =
@@ -24,17 +39,38 @@ const DetailInfo = (props) => {
       setIsShowDialog(true);
       return;
     }
+
+    handleAddToFirestore(product);
+    toast.success('The product has been added to your cart', {
+      position: toast.POSITION.TOP_RIGHT,
+      autoClose: 3000,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      progress: undefined,
+      draggable: true,
+      closeOnClick: true,
+      theme: 'colored',
+    });
   };
 
   const onOptionChange = (e, quantity) => {
     handleOptionChange(e, quantity);
   };
 
+  const contentLoader = () => (
+    <ContentLoader>
+      <rect x="0" y="0" width="100%" height="35" />
+    </ContentLoader>
+  );
+
   return (
     <section className={styles.container}>
       <div className={styles.product}>
         <div className={styles.product__info}>
-          <h1 className={styles.product__info__name}>{name}</h1>
+          <h1 className={styles.product__info__name}>
+            {status === 'pending' && contentLoader()}
+            {status === 'fulfilled' && name}
+          </h1>
           <span className={styles.product__info__rate}>
             <BsStarFill />
             <BsStarFill />
@@ -91,12 +127,14 @@ const DetailInfo = (props) => {
             </button>
           </div>
           <div className={styles.button__add}>
-            <button
-              onClick={onHandleAddToFirestore}
+            <div
               className={styles.button__add__cart}
+              onClick={onHandleAddToFirestore}
             >
-              ADD TO CART
-            </button>
+              <Button primary mdSize>
+                add to cart
+              </Button>
+            </div>
             <button className={styles.button__add__like}>
               <AiOutlineHeart />
             </button>

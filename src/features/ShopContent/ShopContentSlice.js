@@ -1,17 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {
-  fetchProducts,
-  fetchProductDetail,
-  fetchProductQnt,
-} from './thunk';
+import { fetchProductQnt, fetchProducts } from './thunk';
 
 export const shopContentSlice = createSlice({
   name: 'shop',
   initialState: {
-    status: 'idle',
+    status: null,
     productList: [],
-    detailProduct: null,
-    paginationActive: 0,
     productId: null,
     productQnt: 0,
   },
@@ -40,9 +34,6 @@ export const shopContentSlice = createSlice({
     setProductId: (state, action) => {
       state.name = action.payload;
     },
-    setPaginationActive: (state, action) => {
-      state.paginationActive = action.payload;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -54,20 +45,12 @@ export const shopContentSlice = createSlice({
         state.productList = action.payload;
       })
       .addCase(fetchProductQnt.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
         state.productQnt = action.payload;
-      })
-      .addCase(fetchProductDetail.pending, (state, action) => {
-        state.status = 'pending';
-      })
-      .addCase(fetchProductDetail.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
-        state.detailProduct = action.payload;
       });
   },
 });
 
-export const { setSelectedDrop, sortProductsByOrder, setPaginationActive } =
+export const { setSelectedDrop, sortProductsByOrder } =
   shopContentSlice.actions;
 
 const shopContentReducer = shopContentSlice.reducer;

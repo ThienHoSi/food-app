@@ -1,12 +1,9 @@
-import { useEffect, useContext } from 'react';
 import queryString from 'query-string';
-
-import './Pagination.scss';
-import ReactPaginate from 'react-paginate';
+import { useContext, useEffect } from 'react';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import ReactPaginate from 'react-paginate';
 import { useDispatch, useSelector } from 'react-redux';
-import { onPagination } from '../../Filter/FilterSlice';
-import { fetchProductQnt, fetchProducts } from '../../thunk';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   paginationActiveSelector,
   paramsSelector,
@@ -15,8 +12,10 @@ import {
   prevSearchSelector,
   productQntSelector,
 } from '../../../../app/selectors';
-import { ApiContext } from '../../../../Context/ApiContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { ApiContext } from '../../../../contexts/ApiContext';
+import { onPagination } from '../../Filter/FilterSlice';
+import { fetchProductQnt, fetchProducts } from '../../thunk';
+import './Pagination.scss';
 
 const Pagination = () => {
   const dispatch = useDispatch();

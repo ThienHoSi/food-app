@@ -1,12 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import styles from './Nav.module.scss';
-import { TiHome } from 'react-icons/ti';
 import { GiKnifeFork } from 'react-icons/gi';
+import { TiHome } from 'react-icons/ti';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchProducts } from '../../../features/ShopContent/thunk';
+import styles from './Nav.module.scss';
 
 const Nav = ({ isMenu, setOpen }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleToHome = () => {
     navigate('/home');
@@ -17,6 +19,7 @@ const Nav = ({ isMenu, setOpen }) => {
 
   const handleToShop = () => {
     navigate('/shop/best-foods');
+    dispatch(fetchProducts({ name: 'best-foods' }));
     if (isMenu) {
       setOpen(false);
     }
@@ -25,12 +28,12 @@ const Nav = ({ isMenu, setOpen }) => {
   return (
     <nav className={isMenu ? styles.menu__nav : styles.nav}>
       <ul>
-          <li onClick={handleToHome}>
-            <span>
-              <TiHome />
-            </span>
-            Home
-          </li>
+        <li onClick={handleToHome}>
+          <span>
+            <TiHome />
+          </span>
+          Home
+        </li>
         <li onClick={handleToShop}>
           <span>
             <GiKnifeFork />

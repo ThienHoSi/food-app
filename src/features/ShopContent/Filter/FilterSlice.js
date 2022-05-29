@@ -8,9 +8,10 @@ export const filterSlice = createSlice({
     prevRate: null,
     prevSearch: null,
     selectedRadio: null,
-    selectedDrop: null,
+    selectedDrop: 'Featured',
     nameActive: null,
     params: null,
+    paginationActive: 0,
   },
   reducers: {
     setPrevName: (state, action) => {
@@ -19,12 +20,15 @@ export const filterSlice = createSlice({
       state.prevRate = null;
       state.prevSearch = null;
       state.selectedDrop = 'Featured';
+      state.params = null;
+      state.paginationActive = 0;
     },
     setPrevPrice: (state, action) => {
       state.prevPrice = action.payload;
       state.prevRate = null;
       state.prevSearch = null;
       state.selectedDrop = 'Featured';
+      state.paginationActive = 0;
     },
     setPrevRate: (state, action) => {
       state.prevRate = action.payload;
@@ -32,6 +36,7 @@ export const filterSlice = createSlice({
       state.prevSearch = null;
       state.selectedRadio = null;
       state.selectedDrop = 'Featured';
+      state.paginationActive = 0;
     },
     setPrevSearch: (state, action) => {
       state.prevSearch = action.payload;
@@ -43,6 +48,7 @@ export const filterSlice = createSlice({
       state.selectedRadio = null;
       state.selectedDrop = 'Featured';
       state.nameActive = null;
+      state.paginationActive = 0;
     },
     setPrevSort: (state, action) => {
       state.prevPrice = null;
@@ -66,6 +72,20 @@ export const filterSlice = createSlice({
     setParams: (state, action) => {
       state.params = action.payload;
     },
+    setPaginationActive: (state, action) => {
+      state.paginationActive = action.payload;
+    },
+    onShopReload: (state, action) => {
+      state.prevName = null;
+      state.prevPrice = null;
+      state.prevRate = null;
+      state.prevSearch = null;
+      state.selectedRadio = null;
+      state.selectedDrop = 'Featured';
+      state.nameActive = null;
+      state.params = null;
+      state.paginationActive = 0;
+    },
   },
 });
 
@@ -81,6 +101,8 @@ export const {
   setNameActive,
   onPagination,
   setParams,
+  setPaginationActive,
+  onShopReload,
 } = filterSlice.actions;
 
 const filterSliceReducer = filterSlice.reducer;

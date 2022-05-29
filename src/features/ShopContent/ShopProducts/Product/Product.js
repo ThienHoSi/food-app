@@ -3,9 +3,9 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart3, BsStarFill } from 'react-icons/bs';
 import { MdLocationPin } from 'react-icons/md';
 import { useNavigate, useParams } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-import { AuthContext } from '../../../../Context/AuthContext';
+import { AuthContext } from '../../../../contexts/AuthContext';
 import useFirestoreProducts from '../../../../hooks/useFirestoreProducts';
 import LazyLoadImage from '../../../../utils/LazyLoadImage/LazyLoadImage';
 import styles from './Product.module.scss';
@@ -35,18 +35,21 @@ const Product = (props) => {
     toast.success('The product has been added to cart', {
       position: toast.POSITION.TOP_RIGHT,
       autoClose: 3000,
-      hideProgressBar: true,
-      pauseOnHover: false,
+      hideProgressBar: false,
+      pauseOnHover: true,
+      progress: undefined,
+      draggable: true,
+      closeOnClick: true,
+      theme: 'colored',
     });
   };
 
   const handleToDetail = (id) => {
-    navigate(`/${params.name}/${id}`);
+    navigate(`/shop/${params.name}/${id}`);
   };
 
   return (
     <div className={styles.container}>
-      <ToastContainer />
       <div id={id} className={styles.products}>
         <div className={styles.products__item}>
           <div

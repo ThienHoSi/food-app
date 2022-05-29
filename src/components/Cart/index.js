@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { cartProductsSelector } from '../../app/selectors';
 import { db } from '../../configs/firebaseConfig';
-import { AuthContext } from '../../Context/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
+import usePrice from '../../hooks/usePrice';
 import Button from '../../UI/Button/Button';
 import emptyCart from './../../assets/img/common/empty_cart.png';
 import styles from './Cart.module.scss';
@@ -18,6 +19,8 @@ const Cart = ({ show, setShow }) => {
   const { user } = useContext(AuthContext);
   const cartProducts = useSelector(cartProductsSelector);
   const overlayRef = useRef();
+
+  const totalPrice = usePrice();
 
   useEffect(() => {
     const clickOnOverlay = (e) => {
@@ -76,21 +79,19 @@ const Cart = ({ show, setShow }) => {
             </Link>
           </div>
         )}
-        <div className={styles.cart__box}>
-          <CartItems />
-          <footer className={styles.cart__products__footer}>
-            <div className={styles.cart__products__footer__total}>
-              <span>Total</span>
-              <span>$777</span>
-            </div>
-            <div className={styles.cart__products__footer__btns}>
-              <Button primary>
-                <MdShoppingCart style={{ fontSize: '2rem', padding: 2 }} />
-                checkout
-              </Button>
-            </div>
-          </footer>
-        </div>
+        <CartItems />
+        <footer className={styles.cart__footer}>
+          <div className={styles.cart__footer__total}>
+            <span>Total</span>
+            <span>${totalPrice}</span>
+          </div>
+          <div className={styles.cart__footer__btns}>
+            <Button primary>
+              <MdShoppingCart style={{ fontSize: '2rem', padding: 2 }} />
+              checkout
+            </Button>
+          </div>
+        </footer>
       </div>
     </div>
   );

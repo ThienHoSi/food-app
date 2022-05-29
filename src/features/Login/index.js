@@ -2,14 +2,13 @@ import { signInWithPopup } from 'firebase/auth';
 import { useContext, useEffect } from 'react';
 import { AiFillFacebook } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import loginThumpSVG from '../../assets/img/svg/loginThump.svg';
 import { auth, fbProvider, ggProvider } from '../../configs/firebaseConfig';
-import { AuthContext } from '../../Context/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import LoginForm from './components';
 import styles from './Login.module.scss';
-import './Login.scss';
 
 const Login = () => {
   const { setHasHeader } = useContext(AuthContext);
@@ -20,8 +19,12 @@ const Login = () => {
       {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
-        hideProgressBar: true,
-        pauseOnHover: false,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        progress: undefined,
+        draggable: true,
+        closeOnClick: true,
+        theme: 'colored',
       }
     );
   };
@@ -39,7 +42,6 @@ const Login = () => {
 
   return (
     <div className={styles.container}>
-      <ToastContainer />
       <div className={styles.wrapper}>
         <div className={styles.thump}>
           <img

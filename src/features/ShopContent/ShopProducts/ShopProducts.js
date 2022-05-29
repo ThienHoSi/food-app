@@ -1,20 +1,19 @@
 import { useState } from 'react';
-
-import styles from './ShopProducts.module.scss';
-import Dialog from '../../../components/Dialog';
-import Handle from './Handle/Handle';
-import Product from './Product/Product';
-import Pagination from './Pagination/Pagination';
 import { useSelector } from 'react-redux';
 import {
-  loadingStatusSelector,
   productListSelector,
+  shopStatusSelector,
 } from '../../../app/selectors';
+import Dialog from '../../../components/Dialog';
 import EmptyShop from './EmptyShop/EmptyShop';
+import Handle from './Handle/Handle';
+import Pagination from './Pagination/Pagination';
+import Product from './Product/Product';
+import styles from './ShopProducts.module.scss';
 
 const ShopProducts = () => {
   const productList = useSelector(productListSelector);
-  const status = useSelector(loadingStatusSelector);
+  const status = useSelector(shopStatusSelector);
   const [isShowDialog, setIsShowDialog] = useState(false);
 
   const openDialog = () => {

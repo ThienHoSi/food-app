@@ -1,7 +1,6 @@
 import shopApi from '../../apis/shopApi';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { setPaginationActive } from './ShopContentSlice';
-import { setName } from '../DetailProductContent/DetailSlice';
+import { setPaginationActive } from './Filter/FilterSlice';
 
 const fetchRelatedProducts = createAsyncThunk(
   'products/fetchRelatedProducts',
@@ -14,10 +13,7 @@ const fetchRelatedProducts = createAsyncThunk(
 const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async ({ name, params, page }, { dispatch, getState }) => {
-    name && dispatch(setName(name));
-    page
-      ? dispatch(setPaginationActive(Number(page) - 1))
-      : dispatch(setPaginationActive(0));
+    page && dispatch(setPaginationActive(Number(page) - 1));
     const res = await shopApi.getAll(name, {
       _limit: 16,
       _page: page,

@@ -1,5 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useContext, useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../../../contexts/AuthContext';
+import useFirestoreProducts from '../../../../hooks/useFirestoreProducts';
 import DetailInfo from './DetailInfo';
 
 const DetailMain = (props) => {
@@ -10,10 +12,12 @@ const DetailMain = (props) => {
   const [prevId, setPrevId] = useState('');
   const [qnt, setQnt] = useState(1);
   const [selectedRadio, setSelectedRadio] = useState('');
-
   const params = useParams();
   const { name, id } = params;
   const paramName = name.replace('-', ' ');
+
+  const { addToFirestore } = useFirestoreProducts();
+  const { user } = useContext(AuthContext) ?? '';
 
   const handleFuncs = {
     handleOptionChange: (e, quantity) => {
@@ -41,7 +45,7 @@ const DetailMain = (props) => {
     },
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (id !== prevId) {
       setQnt(1);
       setFixedPrice(price || 0 * qnt);
@@ -65,9 +69,12 @@ const DetailMain = (props) => {
     setPrevId(id);
   }, [id, price, prevId, qnt]);
 
-  // const handleAddToFirestore = () => {
+  const handleAddToFirestore = () => {
+    if (!product || !user.uid) return;
 
-  // }
+    const info = { productInfo: { ...product, qnt: qnt } };
+    addToFirestore(user.uid, info);
+  };
 
   return (
     <DetailInfo
@@ -77,6 +84,7 @@ const DetailMain = (props) => {
       product={product}
       price={fixedPrice || price}
       qnt={qnt}
+      handleAddToFirestore={handleAddToFirestore}
     />
   );
 };

@@ -1,12 +1,7 @@
-import { useDispatch, useSelector } from 'react-redux';
 import queryString from 'query-string';
-
-import styles from './Filter.module.scss';
-import { fetchProducts } from '../thunk';
-import { BsStarFill, BsStar } from 'react-icons/bs';
-import { shopFilterInfo } from '../../../constants/shopFilterInfo';
-import { priceOptions } from '../../../constants/priceOptions';
-
+import { BsStar, BsStarFill } from 'react-icons/bs';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   nameActiveSelector,
   prevNameSelector,
@@ -14,15 +9,18 @@ import {
   prevRateSelector,
   selectedRadioSelector,
 } from '../../../app/selectors';
+import { priceOptions } from '../../../constants/priceOptions';
+import { shopFilterInfo } from '../../../constants/shopFilterInfo';
+import { fetchProducts } from '../thunk';
+import styles from './Filter.module.scss';
 import {
   setNameActive,
+  setParams,
   setPrevName,
   setPrevPrice,
   setPrevRate,
   setSelectedRadio,
-  setParams,
 } from './FilterSlice';
-import { useNavigate, useParams } from 'react-router-dom';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -49,7 +47,7 @@ const Filter = () => {
     }
     dispatch(setPrevName(params));
     dispatch(setNameActive(params));
-    dispatch(setParams(null));
+    console.log('fetch api');
   };
 
   const handleOptChange = (e) => {
@@ -58,7 +56,7 @@ const Filter = () => {
 
   const handleFilterByPrice = (query) => {
     if (prevPrice !== query) {
-      dispatch(fetchProducts({ name: nameActive, params: query })).then(() =>
+      dispatch(fetchProducts({ name: name, params: query })).then(() =>
         navigate({
           pathname: `/shop/${name}`,
           search: queryString.stringify({
@@ -77,7 +75,7 @@ const Filter = () => {
     const stringQuery = JSON.stringify(query);
 
     if (prevRate !== stringQuery) {
-      dispatch(fetchProducts({ name: nameActive, params: query })).then(() => {
+      dispatch(fetchProducts({ name: name, params: query })).then(() => {
         navigate({
           pathname: `/shop/${name}`,
           search: queryString.stringify({

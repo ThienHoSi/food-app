@@ -1,12 +1,26 @@
 @import '../../styles/variables.scss';
 
-.lazyLoad {
+.container {
+    display: inline-block;
     width: 100%;
-    object-fit: cover;
+    height: 100%;
+    transition: filter 0.3s;
     filter: blur(7px);
-    transition: filter ease 0.3s;
+
+    .lazyLoad {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0.4;
+        transition: opacity 0.3s;
+    }
 
     &.active {
         filter: blur(0);
+
+        .lazyLoad {
+            opacity: 1;
+        }
     }
+
 }

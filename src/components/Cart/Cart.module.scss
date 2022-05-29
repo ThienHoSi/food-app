@@ -41,6 +41,9 @@
     width: 100%;
     height: 100%;
     background-color: $white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
     @include breakpoint(smd) {
       width: 48%;
@@ -114,48 +117,40 @@
       }
     }
 
-    &__box {
+    &__footer {
+      position: relative;
+      background-color: $white;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 100%;
+      border-top: 1px solid $borderColor;
+      padding: $spacing-md 16px;
 
-      &__footer {
-        position: relative;
-        top: -64px;
-        background-color: $white;
+      &__total {
         display: flex;
-        flex-direction: column;
         justify-content: space-between;
-        border-top: 1px solid $borderColor;
-        padding: $spacing-md 16px;
 
-        &__total {
-          display: flex;
-          justify-content: space-between;
+        span {
+          font-size: 1.8rem;
+          font-weight: 700;
+          color: $text;
 
-          span {
+          &:not(:first-child) {
             font-size: 1.8rem;
-            font-weight: 700;
-            color: $text;
-
-            &:not(:first-child) {
-              font-size: 1.8rem;
-              color: $primary;
-            }
+            color: $primary;
           }
         }
+      }
 
-        &__btns {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-top: $spacing-sm;
-          padding: 0 8px;
+      &__btns {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: $spacing-sm;
+        padding: 0 8px;
 
-          @include breakpoint(md) {
-            justify-content: center;
-          }
+        @include breakpoint(md) {
+          justify-content: center;
         }
       }
     }

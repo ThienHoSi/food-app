@@ -1,25 +1,30 @@
 import { signOut } from 'firebase/auth';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AiOutlineTags } from 'react-icons/ai';
 import { CgClose, CgMenuLeft } from 'react-icons/cg';
 import { MdAccountCircle, MdShoppingCart } from 'react-icons/md';
 import { RiAccountPinBoxFill, RiLogoutBoxRLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import { cartProductsSelector } from '../../app/selectors';
 import { auth } from '../../configs/firebaseConfig';
-import { AuthContext } from '../../Context/AuthContext';
+import { AuthContext } from '../../contexts/AuthContext';
 import useWindowSize from '../../hooks/useWindowSize';
 import Logo from '../../UI/Logo/Logo';
 import Cart from '../Cart';
+import Dialog from '../Dialog';
 import styles from './Header.module.scss';
 import Nav from './Nav/Nav';
-import Dialog from '../Dialog';
 
 const Header = () => {
   const { user, setUser, hasHeader } = useContext(AuthContext);
   const [menuOpen, setMenuOpen] = useState(false);
   const [showCart, setShowCart] = useState(false);
+  const [totalQnt, setTotalQnt] = useState(0);
   const [headerActive, setHeaderActive] = useState(false);
   const [isShowDialog, setIsShowDialog] = useState(false);
+
+  const cartProducts = useSelector(cartProductsSelector);
 
   const size = useWindowSize();
   const navigate = useNavigate();
@@ -28,6 +33,14 @@ const Header = () => {
     user && setShowCart(true);
     !user && setIsShowDialog(true);
   };
+
+  useEffect(() => {
+    const totaQnt = cartProducts.reduce(
+      (accu, product) => accu + product.qnt,
+      0
+    );
+    setTotalQnt(totaQnt);
+  }, [cartProducts]);
 
   const handleToLoginPage = () => {
     navigate('/login');
@@ -126,7 +139,9 @@ const Header = () => {
             onClick={ToggleCart}
           >
             <MdShoppingCart />
-            <div className={styles.header__grid__right__cart__qnt}>0</div>
+            <div className={styles.header__grid__right__cart__qnt}>
+              {user ? totalQnt : 0}
+            </div>
           </div>
           {user ? (
             <div className={styles.header__grid__right__account}>

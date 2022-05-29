@@ -170,37 +170,8 @@
                 align-items: center;
 
                 &__cart {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 400px;
-                    height: 42px;
-                    border: none;
-                    outline: none;
-                    border-radius: 999px;
-                    background-color: $primary;
-                    color: $white;
-                    text-transform: uppercase;
-                    font-weight: 700;
-                    font-size: 1.2rem;
-                    box-shadow: 0 3px 8px rgba($color: $black, $alpha: 0.2);
-                    padding: 8px $spacing-sm;
-                    transition: all ease 0.3s;
+                    flex: 1;
                     margin-right: 8px;
-
-                    @include breakpoint(md) {
-                        width: 180px;
-                    }
-
-                    @include breakpoint(lg) {
-                        width: 270px;
-                    }
-
-                    &:hover {
-                        box-shadow: 0 5px 15px rgba($color: $black, $alpha: 0.25);
-                        filter: brightness(92%);
-                        cursor: pointer;
-                    }
                 }
 
                 &__like {

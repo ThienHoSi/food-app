@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import { cartProductsSelector } from '../../../app/selectors';
-import { AuthContext } from '../../../Context/AuthContext';
+import { AuthContext } from '../../../contexts/AuthContext';
 import useFirestoreProducts from '../../../hooks/useFirestoreProducts';
 import CartItem from './CartItem';
 import styles from './CartItems.module.scss';

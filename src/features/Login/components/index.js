@@ -3,8 +3,9 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import FormField from './FormField';
 import styles from './styles.module.scss';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import Button from '../../../UI/Button/Button';
 
 const schema = yup.object().shape({
   email: yup
@@ -30,8 +31,12 @@ function LoginForm() {
       {
         position: toast.POSITION.TOP_RIGHT,
         autoClose: 3000,
-        hideProgressBar: true,
-        pauseOnHover: false,
+        hideProgressBar: false,
+        pauseOnHover: true,
+        progress: undefined,
+        draggable: true,
+        closeOnClick: true,
+        theme: 'colored',
       }
     );
   };
@@ -54,7 +59,6 @@ function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit(onHandleSubmit)} className={styles.form}>
-      <ToastContainer />
       <FormField
         name="email"
         label="Email address"
@@ -77,10 +81,11 @@ function LoginForm() {
           Remember Your Password
         </label>
       </div>
-
-      <button className={styles.form__btn} type="submit">
-        log in
-      </button>
+      <div className={styles.form__btn} type="submit">
+        <Button primary depSize>
+          log in
+        </Button>
+      </div>
     </form>
   );
 }

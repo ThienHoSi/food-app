@@ -1,12 +1,13 @@
-import { useContext, useEffect } from 'react';
 import queryString from 'query-string';
-import styles from './ShopContent.module.scss';
-import Filter from './Filter/Filter';
-import ShopProducts from './ShopProducts/ShopProducts';
-import { useNavigate, useParams, useLocation } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
+import Filter from './Filter/Filter';
+import { onShopReload } from './Filter/FilterSlice';
+import styles from './ShopContent.module.scss';
+import ShopProducts from './ShopProducts/ShopProducts';
 import { fetchProducts } from './thunk';
-import { AuthContext } from '../../Context/AuthContext';
 
 const ShopContent = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const ShopContent = () => {
     setHasHeader(true);
   }, [setHasHeader]);
 
-  useEffect(() => {
+  window.addEventListener('load', () => {
     const param = location.search;
 
     if (param) {
@@ -43,8 +44,9 @@ const ShopContent = () => {
           }),
         });
       });
+      dispatch(onShopReload());
     }
-  }, [dispatch, location.search, name, navigate]);
+  });
 
   return (
     <section className={styles.container}>

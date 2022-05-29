@@ -1,9 +1,7 @@
 const productListSelector = (state) => state.shop.productList;
-const loadingStatusSelector = (state) => state.shop.status;
-const detailProductSelector = (state) => state.shop.detailProduct;
+const shopStatusSelector = (state) => state.shop.status;
 const productQntSelector = (state) => state.shop.productQnt;
 const productIdSelector = (state) => state.shop.productId;
-const paginationActiveSelector = (state) => state.shop.paginationActive;
 
 const prevNameSelector = (state) => state.filter.prevName;
 const prevPriceSelector = (state) => state.filter.prevPrice;
@@ -13,16 +11,18 @@ const selectedRadioSelector = (state) => state.filter.selectedRadio;
 const selectedDropSelector = (state) => state.filter.selectedDrop;
 const nameActiveSelector = (state) => state.filter.nameActive;
 const paramsSelector = (state) => state.filter.params;
+const paginationActiveSelector = (state) => state.filter.paginationActive;
 
-const relatedProductsSelector = (state) => state.detail.relatedProducts;
+const detailProductStatusSelector = (state) => state.detail.status;
 const nameSelector = (state) => state.detail.name;
+const relatedProductsSelector = (state) => state.detail.relatedProducts;
+const detailProductSelector = (state) => state.detail.detailProduct;
 
 const cartProductsSelector = (state) => state.cart;
 
 export {
   productListSelector,
-  loadingStatusSelector,
-  detailProductSelector,
+  shopStatusSelector,
   productQntSelector,
   productIdSelector,
   paginationActiveSelector,
@@ -34,7 +34,9 @@ export {
   selectedDropSelector,
   nameActiveSelector,
   paramsSelector,
-  relatedProductsSelector,
+  detailProductStatusSelector,
   nameSelector,
+  relatedProductsSelector,
+  detailProductSelector,
   cartProductsSelector,
 };

@@ -6,7 +6,7 @@ import Delivery from '../components/Delivery/Delivery';
 import HomeProducts from '../components/HomeProducts/HomeProducts';
 import HomeThump from '../components/HomeThump/HomeThump';
 import HomeWork from '../components/HomeWork/HomeWork';
-import { AuthContext } from '../Context/AuthContext';
+import { AuthContext } from '../contexts/AuthContext';
 
 const Home = () => {
   const { setHasHeader } = useContext(AuthContext);
