@@ -47,7 +47,6 @@ const Filter = () => {
     }
     dispatch(setPrevName(params));
     dispatch(setNameActive(params));
-    console.log('fetch api');
   };
 
   const handleOptChange = (e) => {
