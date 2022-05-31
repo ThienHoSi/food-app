@@ -1,6 +1,6 @@
 <h1 align='center'>Food App 🍕</h1>
 
-#### **🍺 Live Demo:**
+#### **🍺 Live Demo:** https://food-appl.web.app/home
 
 #### **🍩 Technologies**
 
