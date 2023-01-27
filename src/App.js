@@ -13,10 +13,10 @@ import ApiProvider from './contexts/ApiContext';
 import AuthProvider from './contexts/AuthContext';
 import ScrollTopButton from './UI/ScrollTopButton/ScrollTopButton';
 
-const DetailProduct = lazy(() => import('./pages/DetailProduct'));
-const Home = lazy(() => import('./pages/Home'));
-const Shop = lazy(() => import('./pages/Shop'));
-const LoginPage = lazy(() => import('./pages/LoginPage'));
+const DetailProduct = lazy(() => import('./Pages/DetailProduct'));
+const Home = lazy(() => import('./Pages/Home'));
+const Shop = lazy(() => import('./Pages/Shop'));
+const LoginPage = lazy(() => import('./Pages/LoginPage'));
 const NotFound = lazy(() => import('./components/NotFound'));
 
 function App() {
