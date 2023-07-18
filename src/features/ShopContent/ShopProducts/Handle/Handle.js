@@ -68,6 +68,7 @@ const Handle = () => {
   return (
     <div className={styles.container}>
       <div className={styles.handle}>
+        <a href='https://j.pn/'>Cyber cast</a>
         <form onSubmit={handleSearch} className={styles.handle__search}>
           <input
             value={searchText}
