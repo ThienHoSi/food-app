@@ -1,0 +1,103 @@
+@import './../../styles/variables.scss';
+
+.container {
+    display: flex;
+
+    .delivery {
+        margin: auto;
+        width: 100%;
+        max-width: 1200px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 36px 10px;
+
+        @include breakpoint(md) {
+            flex-direction: row;
+        }
+
+        &__content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            @include breakpoint(md) {
+                width: 46.66667%;
+                margin-right: 48px;
+            }
+
+            &__descr {
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+
+                @include breakpoint(md) {
+                    text-align: left;
+                }
+
+                &__title {
+                    @include title;
+                }
+
+                &__subtitle {
+                    @include subtitle;
+
+                    span {
+                        color: $primary;
+                    }
+                }
+
+                &__text {
+                    font-size: 1.5rem;
+                    color: $text;
+                    margin: $spacing-md 0;
+                    line-height: 1.4;
+                }
+            }
+
+
+            &__contact {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                a {
+                    text-decoration: none;
+                }
+
+                img {
+                    width: 70px;
+                    transform: rotateY(180deg);
+                }
+
+                span {
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 1.5rem;
+                    color: $text;
+                    margin: 0 $spacing-sm;
+
+                    strong {
+                        font-weight: 900;
+                        color: $primary;
+                        margin-top: 4px;
+                    }
+                }
+            }
+        }
+
+        &__img {
+            display: none;
+
+            img {
+                width: 100%;
+            }
+
+            @include breakpoint(md) {
+                display: flex;
+                width: 58.33333%;
+            }
+        }
+    }
+}

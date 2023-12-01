@@ -1,0 +1,20 @@
+@import './../../styles/variables.scss';
+
+.container {
+    display: flex;
+
+    .content {
+        margin: auto;
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 10px 80px;
+
+        .product {
+            width: 100%;
+
+            @include breakpoint(md) {
+                display: flex;
+            }
+        }
+    }
+}

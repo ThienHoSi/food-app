@@ -1,0 +1,27 @@
+@import "./reset.scss";
+@import "./variables.scss";
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+    font-family: $lato;
+    line-height: 1.6rem;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+#root {
+    height: 100%;
+    user-select: none;
+}
+
+.Toastify .Toastify__toast-container--top-right {
+    top: 4.4em;
+    right: 1em;
+}
+
+.Toastify__toast-body>div:last-child {
+    font-size: 1.5em;
+}

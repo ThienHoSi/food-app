@@ -1,0 +1,98 @@
+@import './../../styles/variables.scss';
+
+.container {
+    background-color: #f7f7f7;
+    display: flex;
+
+    .bottomBanner {
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        max-width: 1200px;
+        padding: 0 10px;
+
+        @include breakpoint(md) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: $spacing-sm;
+        }
+
+        @include breakpoint(lg) {
+            padding: 108px 10px 72px;
+        }
+
+        &__content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 60px;
+            margin-bottom: $spacing-sm;
+
+            @include breakpoint(xl) {
+                padding: 0 16px;
+            }
+
+            &__img {
+                width: 150px;
+                height: 150px;
+                margin-bottom: $spacing-md;
+            }
+
+            &__descr {
+                text-align: center;
+
+                &__title {
+                    font-size: 2.2rem;
+                    font-weight: 700;
+                    margin-bottom: $spacing-sm;
+                    color: $text;
+                }
+
+                &__text {
+                    font-size: 1.6rem;
+                    margin-bottom: $spacing-sm;
+                    color: #676767;
+                }
+            }
+
+            &:first-child {
+                .bottomBanner__content__download {
+                    display: none;
+                }
+            }
+
+            &__download {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: $spacing-md;
+
+                span {
+                    cursor: pointer;
+
+                    &:first-child {
+
+                        img {
+                            margin-right: $spacing-md;
+                        }
+                    }
+
+                    img {
+                        height: 40px;
+
+                        @include breakpoint(md) {
+                            height: 53px;
+                        }
+                    }
+                }
+
+            }
+        }
+
+    }
+}

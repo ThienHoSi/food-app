@@ -1,0 +1,246 @@
+@import './../../styles/variables.scss';
+
+.container {
+    margin-top: 152px;
+
+    .homeThump {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 410px;
+        background-position: bottom;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+
+        @include breakpoint(lg) {
+            height: 510px;
+        }
+
+        &__content {
+            position: relative;
+            background-color: transparent;
+            width: 135px;
+            height: 135px;
+            letter-spacing: 0.5px;
+
+            @include breakpoint(lg) {
+                width: 175px;
+                height: 175px;
+            }
+
+            &:hover {
+                .homeThump__content__main {
+                    background-color: $primary;
+
+                    &__name {
+                        color: $white;
+                    }
+
+                    &__price {
+                        color: $white
+                    }
+                }
+
+                .homeThump__content__gooey {
+                    background-color: $primary;
+
+                    &:first-of-type {
+                        right: -20%;
+                        top: 0;
+                    }
+
+                    &:nth-of-type(2) {
+                        left: -15%;
+                        bottom: -18%;
+                    }
+
+                    &:nth-of-type(3) {
+                        left: -14%;
+                        top: -12%;
+                    }
+
+                }
+
+                .homeThump__content__btn::before {
+                    background-color: $primary2;
+                }
+            }
+
+            &__main {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                z-index: 1;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: translate(-50%, -50%);
+                border-radius: 30% 70% 70% 30%/ 30% 30% 70% 70%;
+                background-color: $white;
+                transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+                &__name {
+                    font-size: 1.8rem;
+                    color: #00000066;
+                    transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+                    @include breakpoint(lg) {
+                        font-size: 2.5rem;
+                    }
+                }
+
+                &__price {
+                    font-size: 4.2rem;
+                    font-weight: 900;
+                    color: $text;
+                    transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+                    @include breakpoint(lg) {
+                        font-size: 5rem;
+                    }
+                }
+            }
+
+            &__gooey {
+                position: absolute;
+                border-radius: 50%;
+                background-color: #ff514e33;
+                transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1) 70ms;
+
+                &:first-of-type {
+                    top: 10%;
+                    right: 20%;
+                    width: 7.5rem;
+                    height: 7.5rem;
+
+                    @include breakpoint(smd) {
+                        width: 10rem;
+                        height: 10rem;
+                    }
+                }
+
+                &:nth-of-type(2) {
+                    bottom: 10%;
+                    left: 10%;
+                    width: 4rem;
+                    height: 4rem;
+
+                    @include breakpoint(smd) {
+                        width: 5rem;
+                        height: 5rem;
+                    }
+                }
+
+                &:nth-of-type(3) {
+                    top: 10%;
+                    left: 10%;
+                    width: 6rem;
+                    height: 6rem;
+
+                    @include breakpoint(smd) {
+                        width: 7rem;
+                        height: 7rem;
+                    }
+                }
+            }
+
+            &__btn {
+                position: absolute;
+                top: 72%;
+                right: 7%;
+                border: none;
+                border-radius: 50%;
+                background-color: transparent;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 38px;
+                height: 38px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1;
+                cursor: pointer;
+                transition: all ease-in-out 0.3s;
+
+                @include breakpoint(lg) {
+                    right: 10%;
+                    width: 45px;
+                    height: 45px;
+                }
+
+                &::before,
+                &::after {
+                    content: "";
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                }
+
+                &::before {
+                    background-color: $primary;
+                    transition: all ease-in-out 0.3s;
+                }
+
+                &::after {
+                    background-color: transparent;
+                    border: 2px solid $primary;
+                    animation: ripple ease-out 0.8s infinite;
+                    box-sizing: border-box;
+                }
+
+                svg {
+                    position: relative;
+                    right: -1px;
+                    color: white;
+                    font-size: 2rem;
+
+                    @include breakpoint(lg) {
+                        font-size: 2.2rem;
+                    }
+                }
+            }
+
+        }
+    }
+
+    .video {
+        width: 70%;
+        height: 34%;
+        margin: auto;
+        box-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transform: scale(0.3);
+        visibility: hidden;
+        transition: transform 0.35s ease-in-out;
+        will-change: all;
+
+        @include breakpoint(md) {
+            height: 60%;
+        }
+
+        &.active {
+            opacity: 1;
+            transform: scale(1);
+            visibility: visible;
+        }
+    }
+}
+
+@keyframes ripple {
+    from {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}

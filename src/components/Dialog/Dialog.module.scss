@@ -1,0 +1,96 @@
+@import '../../styles/variables.scss';
+
+.dialog {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    visibility: hidden;
+    display: flex;
+
+    &.show {
+        visibility: visible;
+    }
+
+    &.show &__overlay {
+        opacity: 1;
+    }
+
+    &__overlay {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+        transition: all 0.25s ease-out;
+    }
+
+    &.show &__content {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__content {
+        z-index: 1;
+        margin: auto;
+        padding: 20px;
+        border-radius: 4px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(300%);
+        opacity: 0.5;
+        visibility: hidden;
+        background-color: $white;
+        transition: all 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
+
+        &__title {
+            font-size: 1.7rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+            text-align: start;
+        }
+
+        &__desc {
+            font-size: 1.6rem;
+        }
+
+        &__btns {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 40px;
+
+            &__item {
+                padding: 8px 10px;
+                font-size: 1.5rem;
+                font-weight: 700;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                cursor: pointer;
+            }
+
+            &__item:first-child {
+                margin-right: 10px;
+                background-color: $white;
+                color: #6e6e6e;
+
+                &:hover {
+                    filter: brightness(97%);
+                }
+            }
+
+            &__item:last-child {
+                background-color: $primary;
+                color: $white;
+                box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+
+                &:hover {
+                    filter: brightness(97%);
+                    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+                }
+            }
+
+        }
+    }
+}

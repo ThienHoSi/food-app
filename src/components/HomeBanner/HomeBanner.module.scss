@@ -1,0 +1,114 @@
+@import './../../styles/variables.scss';
+
+
+.banner {
+    width: 100%;
+    height: 500px;
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    transition: all ease-in-out 0.5s;
+
+    @include breakpoint(lg) {
+        height: 680px;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    &__container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+
+        @include breakpoint(lg) {
+            align-items: flex-start;
+            width: 1200px;
+            margin: auto;
+            padding-left: 10px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        &__title {
+            font-size: 1.4rem;
+            color: $white;
+            font-weight: 800;
+            text-transform: uppercase;
+            animation: slideTitle ease 0.8s;
+
+            @include breakpoint(lg) {
+                font-size: 1.8rem;
+            }
+        }
+
+        &__content {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: $white;
+            line-height: 1.2;
+            text-align: center;
+            margin: 4px 0 16px 0;
+            animation: slideDescr ease 1.4s;
+
+            @include breakpoint(lg) {
+                width: 60%;
+                font-size: 7.2rem;
+                text-align: left;
+            }
+
+            strong {
+                color: $primary;
+            }
+
+        }
+
+        button {
+            animation: slideBtn ease 1.4s;
+
+            svg {
+                font-size: 1.6rem;
+                margin-right: 2px;
+            }
+        }
+    }
+}
+
+@keyframes slideTitle {
+    from {
+        transform: translateX(-8px);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideDescr {
+    from {
+        opacity: 0;
+        transform: translateX(-16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideBtn {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
