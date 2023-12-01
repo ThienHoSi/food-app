@@ -1,3 +1,3 @@
 export default {
-    foo: 'nothing'
+    foo: 'foo'
 }
